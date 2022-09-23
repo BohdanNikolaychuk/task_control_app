@@ -6,6 +6,10 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  .filter {
+    display: flex;
+  }
   .dashboards {
     display: flex;
     flex-wrap: wrap;

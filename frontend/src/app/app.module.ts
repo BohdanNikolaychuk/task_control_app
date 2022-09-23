@@ -7,7 +7,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BoardComponent } from './pages/board/board.component';
 import { PathNotFoundComponent } from './pages/path-not-found/path-not-found.component';
 import { HeaderComponent } from './features/header/header.component';
-import { SortButtonModule } from './shared/sort-button/sort-button.module';
+import { ButtonModule } from './shared/button/button.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { SortButtonModule } from './shared/sort-button/sort-button.module';
     PathNotFoundComponent,
     HeaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SortButtonModule],
+  imports: [BrowserModule, AppRoutingModule, ButtonModule],
   providers: [],
   bootstrap: [AppComponent],
   exports: [],
