@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const app = express();
 const mongoose = require('mongoose');
 
+const router = require('./routers/dashboardsRouter');
+
 
 app.use(express.json());
 
@@ -14,7 +16,7 @@ app.use(morgan('tiny'));
 
 
 
-app.use('/',)
+app.use('/', router)
 
 
 const start = async () => {

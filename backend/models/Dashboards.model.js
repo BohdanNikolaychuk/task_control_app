@@ -13,6 +13,6 @@ const DashBoardsSchema = new mongoose.Schema({
 })
 
 
-const DashBoards = mongoose.Model('DashBoards', DashBoardsSchema);
+const DashBoards = mongoose.model('DashBoards', DashBoardsSchema);
 
 module.exports = { DashBoards }

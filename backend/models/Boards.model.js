@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const BoardSchema = mongoose.Schema({
+const BoardSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -14,6 +14,6 @@ const BoardSchema = mongoose.Schema({
   }
 })
 
-const Boards = mongoose.Model('Boards', BoardSchema);
+const Boards = mongoose.model('Boards', BoardSchema);
 
 module.exports = { Boards }
