@@ -9,17 +9,15 @@
     </div>
   </div>
   <div class="dashboards">
-    <button class="add__dashboard sub__title">add new dashboard</button>
-    <div class="dashboard">
+    <button class="add__dashboard sub__title" routerLink="/new-dash">
+      add new dashboard
+    </button>
+    <div class="dashboard" *ngFor="let dashboard of dashboards">
       <div class="dashboard__info">
-        <h3 class="dashboard__info-title">Name</h3>
-        <p class="dashboard__info-text">Create date</p>
-      </div>
-    </div>
-    <div class="dashboard">
-      <div class="dashboard__info">
-        <h3 class="dashboard__info-title">Name</h3>
-        <p class="dashboard__info-text">Create date</p>
+        <h3 class="dashboard__info-title">{{ dashboard.name }}</h3>
+        <p class="dashboard__info-text">
+          {{ dashboard.createdAt | date: "MM/dd/yyyy hh:mm:ss" }}
+        </p>
       </div>
     </div>
   </div>

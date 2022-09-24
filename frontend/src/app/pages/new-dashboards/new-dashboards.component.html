@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="new__dash">
+    <h1 class="title">Create a new dashboard</h1>
+    <input
+      #nameInput
+      class="input"
+      type="text"
+      placeholder="Enter dashboard name..."
+    />
+    <div class="buttons">
+      <button class="button" routerLink="/">Cancel</button>
+      <button class="button" (click)="createDashBoard(nameInput.value)">
+        Create
+      </button>
+    </div>
+  </div>
+</div>

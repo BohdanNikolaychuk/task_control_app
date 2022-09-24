@@ -13,15 +13,15 @@ export class WebRequestService {
   }
 
   get(url: string) {
-    return this.http.get(`${this.MAIN_URL}/${url}`);
+    return this.http.get(`${this.MAIN_URL}${url}`);
   }
   post(url: string, payload: Object) {
-    return this.http.post(`${this.MAIN_URL}/${url}`, payload);
+    return this.http.post(`${this.MAIN_URL}${url}`, payload);
   }
   patch(url: string, payload: Object) {
-    return this.http.patch(`${this.MAIN_URL}/${url}`, payload);
+    return this.http.patch(`${this.MAIN_URL}${url}`, payload);
   }
   delete(url: string) {
-    return this.http.delete(`${this.MAIN_URL}/${url}`);
+    return this.http.delete(`${this.MAIN_URL}${url}`);
   }
 }
