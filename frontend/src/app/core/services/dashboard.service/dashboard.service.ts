@@ -13,4 +13,7 @@ export class DashboardService {
   createDashBoard(name: string) {
     return this.webRequest.post('dashboards', { name });
   }
+  getBoard(dashId: string) {
+    return this.webRequest.get(`dashboards/${dashId}/boards`);
+  }
 }

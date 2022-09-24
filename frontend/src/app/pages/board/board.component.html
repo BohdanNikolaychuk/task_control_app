@@ -8,11 +8,8 @@
       <div class="add__button">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="task">
-        <span>Task 1</span>
-      </div>
-      <div class="task">
-        <span>Task 2</span>
+      <div class="task" *ngFor="let board of boards">
+        <span>{{ board.name }}</span>
       </div>
     </div>
     <div class="kanban__block">

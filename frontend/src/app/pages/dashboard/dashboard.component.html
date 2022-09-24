@@ -12,7 +12,11 @@
     <button class="add__dashboard sub__title" routerLink="/new-dash">
       add new dashboard
     </button>
-    <div class="dashboard" *ngFor="let dashboard of dashboards">
+    <div
+      class="dashboard"
+      *ngFor="let dashboard of dashboards"
+      routerLink="{{ dashboard._id }}/board"
+    >
       <div class="dashboard__info">
         <h3 class="dashboard__info-title">{{ dashboard.name }}</h3>
         <p class="dashboard__info-text">
