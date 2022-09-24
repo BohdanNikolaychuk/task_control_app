@@ -1,9 +1,8 @@
 .button-23 {
-  background-color: #ffffff;
-  border: 1px solid #222222;
+  background-color: inherit;
   border-radius: 8px;
   box-sizing: border-box;
-  color: #222222;
+  color: white;
   cursor: pointer;
   display: inline-block;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
@@ -21,6 +20,5 @@
 }
 .button-23:active {
   background-color: #f7f7f7;
-  border-color: #000000;
   transform: scale(0.96);
 }

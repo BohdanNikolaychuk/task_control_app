@@ -1,23 +1,33 @@
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  .info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .filter {
-    display: flex;
-  }
-  .dashboards {
-    display: flex;
-    flex-wrap: wrap;
-    .dashboard {
-      margin: 20px;
-      width: 100px;
-      height: 100px;
-      background-color: #7f6faa;
+.filter {
+  display: flex;
+}
+.dashboards {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 120px;
+  .dashboard {
+    margin: 20px;
+    background: #262626;
+    border-radius: 16px;
+    color: #ffffff;
+    padding: 30px;
+    &__info {
+      padding: 20px;
+      text-align: center;
+      align-items: center;
+      &-title {
+        font-size: 36px;
+        padding-bottom: 10px;
+      }
+      &-text {
+        font-size: 29px;
+      }
     }
   }
 }
