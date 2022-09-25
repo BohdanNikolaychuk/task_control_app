@@ -12,8 +12,7 @@ export class BoardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -22,7 +21,6 @@ export class BoardComponent implements OnInit {
       this.dashboardService
         .getBoard(params['dashId'])
         .subscribe((boards: any) => {
-          console.log(boards);
           this.boards = boards;
         });
     });

@@ -16,15 +16,11 @@ export class NewDashboardsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
-      this.dashId = params['dashId'];
-      console.log(this.dashId);
-    });
-  }
+  ngOnInit(): void {}
 
   createDashBoard(name: string) {
     this.dashboardService.createDashBoard(name).subscribe((newDashBoard) => {
+      console.log(newDashBoard);
       this.router.navigate(['../'], { relativeTo: this.route });
     });
   }

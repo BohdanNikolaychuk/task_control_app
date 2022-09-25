@@ -8,21 +8,33 @@
       <div class="add__button">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="task" *ngFor="let board of boards">
-        <span>{{ board.name }}</span>
-      </div>
+      <ng-container *ngFor="let board of boards">
+        <div class="task" *ngIf="board.status === 'TODO'">
+          <span>{{ board.name }}</span>
+        </div>
+      </ng-container>
     </div>
     <div class="kanban__block">
       <h3 class="title">In Progress</h3>
       <div class="add__button">
         <span class="sub__title">add new task</span>
       </div>
+      <ng-container *ngFor="let board of boards">
+        <div class="task" *ngIf="board.status === 'INPROGRESS'">
+          <span>{{ board.name }}</span>
+        </div>
+      </ng-container>
     </div>
     <div class="kanban__block">
       <h3 class="title">Done</h3>
       <div class="add__button">
         <span class="sub__title">add new task</span>
       </div>
+      <ng-container *ngFor="let board of boards">
+        <div class="task" *ngIf="board.status === 'DONE'">
+          <span>{{ board.name }}</span>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

@@ -9,13 +9,7 @@ import { DashboardService } from './../../core/services/dashboard.service/dashbo
 })
 export class DashboardComponent implements OnInit {
   dashboards!: any[];
-  boards!: any[];
-
-  constructor(
-    private dashboardService: DashboardService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.dashboardService.getDashBoards().subscribe((dashboards: any) => {

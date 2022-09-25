@@ -1,24 +1,13 @@
 .button-23 {
   background-color: inherit;
-  border-radius: 8px;
-  box-sizing: border-box;
-  color: white;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
-    "Helvetica Neue", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 20px;
-  margin: 0;
-  outline: none;
-  padding: 5px 10px;
-  position: relative;
+  border-radius: 16px;
   text-align: center;
+  align-items: center;
+  border: 1px solid #6a6dcd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 15px 30px;
   margin: 10px;
-  text-decoration: none;
-}
-.button-23:active {
-  background-color: #f7f7f7;
-  transform: scale(0.96);
+  cursor: pointer;
+  color: #6a6dcd;
 }
