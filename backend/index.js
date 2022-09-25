@@ -6,9 +6,10 @@ const mongoose = require('mongoose');
 
 const router = require('./routers/dashboardsRouter');
 
+const cors = require('cors');
 
 app.use(express.json());
-
+app.use(cors());
 
 mongoose.connect('mongodb+srv://admin:admin@cluster0.gecldbo.mongodb.net/test?retryWrites=true&w=majority');
 

@@ -37,7 +37,7 @@ router.delete('/dashboards/:id', (req, res) => {
 
 router.get('/dashboards/:dashId/boards', (req, res) => {
   Boards.find({
-    _dashId: req.params.dashId,
+    dashId: req.params.dashId,
   }).then((boards) => {
     res.send(boards);
   });

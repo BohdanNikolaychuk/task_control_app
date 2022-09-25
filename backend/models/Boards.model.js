@@ -11,7 +11,14 @@ const BoardSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: true,
 
+  },
+  status: {
+    type: String,
+    default: "TODO",
+    enum: ['TODO', "INPROGRESS", 'DONE'],
+    required: true,
   }
+
 })
 
 const Boards = mongoose.model('Boards', BoardSchema);
