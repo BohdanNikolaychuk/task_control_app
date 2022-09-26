@@ -10,6 +10,7 @@ import { PathNotFoundComponent } from './pages/path-not-found/path-not-found.com
 import { HeaderComponent } from './features/header/header.component';
 import { ButtonModule } from './shared/button/button.module';
 import { NewDashboardsComponent } from './pages/new-dashboards/new-dashboards.component';
+import { NewBoardsComponent } from './pages/new-boards/new-boards.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NewDashboardsComponent } from './pages/new-dashboards/new-dashboards.co
     PathNotFoundComponent,
     HeaderComponent,
     NewDashboardsComponent,
+    NewBoardsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, ButtonModule, HttpClientModule],
   providers: [],

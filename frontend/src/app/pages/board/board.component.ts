@@ -9,7 +9,7 @@ import { DashboardService } from 'src/app/core/services/dashboard.service/dashbo
 })
 export class BoardComponent implements OnInit {
   boards!: any[];
-
+  selectedID!: string;
   constructor(
     private dashboardService: DashboardService,
     private route: ActivatedRoute
@@ -17,7 +17,9 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      console.log(params['dashId']);
+      this.selectedID = params['dashId'];
+      console.log(this.selectedID);
+
       this.dashboardService
         .getBoard(params['dashId'])
         .subscribe((boards: any) => {

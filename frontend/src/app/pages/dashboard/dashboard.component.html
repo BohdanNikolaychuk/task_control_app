@@ -12,16 +12,21 @@
     <button class="add__dashboard sub__title" routerLink="/new-dash">
       add new dashboard
     </button>
-    <div
-      class="dashboard"
-      *ngFor="let dashboard of dashboards"
-      routerLink="{{ dashboard._id }}/boards"
-    >
+    <div class="dashboard" *ngFor="let dashboard of dashboards; let i = index">
       <div class="dashboard__info">
         <h3 class="dashboard__info-title">{{ dashboard.name }}</h3>
         <p class="dashboard__info-text">
           {{ dashboard.createdAt | date: "MM/dd/yyyy hh:mm:ss" }}
         </p>
+        <p></p>
+        <app-button
+          (click)="deleteDashBoard(dashboard._id, i)"
+          name="delete"
+        ></app-button>
+        <app-button
+          routerLink="{{ dashboard._id }}/boards"
+          name="more info"
+        ></app-button>
       </div>
     </div>
   </div>

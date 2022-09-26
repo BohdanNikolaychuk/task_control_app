@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
 @Component({
@@ -9,11 +9,21 @@ import { DashboardService } from './../../core/services/dashboard.service/dashbo
 })
 export class DashboardComponent implements OnInit {
   dashboards!: any[];
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.dashboardService.getDashBoards().subscribe((dashboards: any) => {
       this.dashboards = dashboards;
+    });
+  }
+
+  deleteDashBoard(id: string, i: number) {
+    this.dashboardService.deleteDashBoard(id).subscribe((newDashBoard) => {
+      console.log(newDashBoard);
+      this.dashboards.splice(i, 1);
     });
   }
 }
