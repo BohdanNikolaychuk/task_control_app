@@ -133,7 +133,7 @@ html {
 }
 .title {
   font-weight: 700;
-  font-size: 50px;
+  font-size: 2.4rem;
   line-height: 60px;
   color: #ffffff;
 }
@@ -142,4 +142,46 @@ html {
   font-size: 20px;
   line-height: 20px;
   color: #ffffff;
+}
+
+.button__cancel {
+  background-color: inherit;
+  border-radius: 16px;
+  text-align: center;
+  align-items: center;
+  border: 1px solid #6a6dcd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 15px 30px;
+  margin: 10px;
+  cursor: pointer;
+  color: #6a6dcd;
+}
+
+.button__create {
+  background-color: #6a6dcd;
+  border-radius: 16px;
+  text-align: center;
+  align-items: center;
+  border: 1px solid #6a6dcd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 15px 30px;
+  margin: 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.button__create:disabled {
+  background-color: inherit;
+  border-radius: 16px;
+  text-align: center;
+  align-items: center;
+  border: 1px solid #6a6dcd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 15px 30px;
+  margin: 10px;
+  cursor: pointer;
+  color: #6a6dcd;
 }

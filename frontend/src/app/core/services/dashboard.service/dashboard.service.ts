@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IForm } from '../../interface/IForm';
 import { WebRequestService } from './../web-request.service/web-request.service';
 
 @Injectable({
@@ -10,12 +11,17 @@ export class DashboardService {
   getDashBoards() {
     return this.webRequest.get('dashboards');
   }
-  createDashBoard(name: string) {
-    return this.webRequest.post('dashboards', { name });
+  createDashBoard(formData: IForm) {
+    return this.webRequest.post('dashboards', formData);
   }
   deleteDashBoard(id: string) {
     return this.webRequest.delete(`dashboards/${id}`);
   }
+
+  editDashBoard(id: string, name: string) {
+    return this.webRequest.patch(`dashboards/${id}`, { name });
+  }
+
   // boards
 
   getBoard(dashId: string) {

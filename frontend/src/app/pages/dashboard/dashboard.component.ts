@@ -9,6 +9,7 @@ import { DashboardService } from './../../core/services/dashboard.service/dashbo
 })
 export class DashboardComponent implements OnInit {
   dashboards!: any[];
+  boards!: any[];
   constructor(
     private dashboardService: DashboardService,
     private router: Router
@@ -18,6 +19,9 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.getDashBoards().subscribe((dashboards: any) => {
       this.dashboards = dashboards;
     });
+    // this.dashboardService.getBoard().subscribe((boards: any) => {
+    //   this.boards = boards;
+    // });
   }
 
   deleteDashBoard(id: string, i: number) {
@@ -25,5 +29,11 @@ export class DashboardComponent implements OnInit {
       console.log(newDashBoard);
       this.dashboards.splice(i, 1);
     });
+  }
+
+  editDashBoards(id: string, name: string) {
+    this.dashboardService
+      .editDashBoard(id, name)
+      .subscribe((editDashBoard) => {});
   }
 }

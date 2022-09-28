@@ -14,15 +14,26 @@
     </button>
     <div class="dashboard" *ngFor="let dashboard of dashboards; let i = index">
       <div class="dashboard__info">
-        <h3 class="dashboard__info-title">{{ dashboard.name }}</h3>
+        <input
+          #inputName
+          class="dashboard__info-title"
+          placeholder="{{ dashboard.name }}"
+        />
+        <p class="dashboard__info-text">{{ dashboard.desc }}</p>
         <p class="dashboard__info-text">
           {{ dashboard.createdAt | date: "MM/dd/yyyy hh:mm:ss" }}
         </p>
         <p></p>
+
         <app-button
           (click)="deleteDashBoard(dashboard._id, i)"
           name="delete"
         ></app-button>
+        <app-button
+          name="Edit"
+          (click)="editDashBoards(dashboard._id, inputName.value)"
+        ></app-button>
+
         <app-button
           routerLink="{{ dashboard._id }}/boards"
           name="more info"

@@ -19,7 +19,9 @@ export class WebRequestService {
     return this.http.post(`${this.MAIN_URL}${url}`, payload);
   }
   patch(url: string, payload: Object) {
-    return this.http.patch(`${this.MAIN_URL}${url}`, payload);
+    return this.http.patch(`${this.MAIN_URL}${url}`, payload, {
+      responseType: 'text',
+    });
   }
   delete(url: string) {
     return this.http.delete(`${this.MAIN_URL}${url}`);
