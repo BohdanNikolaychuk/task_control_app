@@ -4,16 +4,16 @@ const router = express.Router();
 
 
 const DashBoardsController = require('../controllers/DashBoards.Controllers');
+const { authMiddleware } = require('../middleware/Auth.Middleware');
 
 
+router.get('/dashboards', authMiddleware, DashBoardsController.getDashBoards);
 
-router.get('/dashboards', DashBoardsController.getDashBoards);
+router.post('/dashboards', authMiddleware, DashBoardsController.createNewDashBoard);
 
-router.post('/dashboards', DashBoardsController.createNewDashBoard);
+router.patch('/dashboards/:id', authMiddleware, DashBoardsController.editDashBoard);
 
-router.patch('/dashboards/:id', DashBoardsController.editDashBoard);
-
-router.delete('/dashboards/:id', DashBoardsController.deleteDashBoard);
+router.delete('/dashboards/:id', authMiddleware, DashBoardsController.deleteDashBoard);
 
 
 module.exports = router;
