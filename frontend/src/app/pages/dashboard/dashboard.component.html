@@ -8,8 +8,36 @@
       <app-button name="DESC"></app-button>
     </div>
   </div>
+  <app-modal [show]="showModal" [customClass]="'custom_modal_class'">
+    <h1 class="title">Create a new dashboard</h1>
+    <form [formGroup]="form" (ngSubmit)="createDashBoard(form.value)">
+      <input
+        class="input"
+        type="text"
+        placeholder="Enter dashboard name..."
+        formControlName="name"
+        required
+        minlength="2"
+      />
+      <input
+        class="input"
+        type="text"
+        placeholder="Enter description..."
+        formControlName="desc"
+        required
+        minlength="2"
+      />
+      <div class="buttons">
+        <button class="button__cancel" (click)="toggleModal()">Cancel</button>
+        <button type="submit" [disabled]="!form.valid" class="button__create">
+          Create
+        </button>
+      </div>
+    </form>
+  </app-modal>
+  <!-- routerLink="/new-dash" -->
   <div class="dashboards">
-    <button class="add__dashboard sub__title" routerLink="/new-dash">
+    <button class="add__dashboard sub__title" (click)="toggleModal()">
       add new dashboard
     </button>
     <div class="dashboard" *ngFor="let dashboard of dashboards; let i = index">

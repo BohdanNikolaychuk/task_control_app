@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IForm } from 'src/app/core/interface/IForm';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
 @Component({
@@ -10,18 +11,32 @@ import { DashboardService } from './../../core/services/dashboard.service/dashbo
 export class DashboardComponent implements OnInit {
   dashboards!: any[];
   boards!: any[];
-  constructor(
-    private dashboardService: DashboardService,
-    private router: Router
-  ) {}
+  showModal = false;
+  form!: FormGroup;
+
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.dashboardService.getDashBoards().subscribe((dashboards: any) => {
       this.dashboards = dashboards;
     });
-    // this.dashboardService.getBoard().subscribe((boards: any) => {
-    //   this.boards = boards;
-    // });
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      desc: new FormControl(''),
+    });
+  }
+  toggleModal = () => {
+    this.showModal = !this.showModal;
+  };
+
+  createDashBoard(formData: IForm): void {
+    this.dashboardService
+      .createDashBoard(formData)
+      .subscribe((newDashBoard) => {
+        this.dashboards.push(newDashBoard);
+        this.form.reset();
+        this.showModal = false;
+      });
   }
 
   deleteDashBoard(id: string, i: number) {

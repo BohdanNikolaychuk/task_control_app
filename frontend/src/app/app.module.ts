@@ -10,8 +10,8 @@ import { BoardComponent } from './pages/board/board.component';
 import { PathNotFoundComponent } from './pages/path-not-found/path-not-found.component';
 import { HeaderComponent } from './features/header/header.component';
 import { ButtonModule } from './shared/button/button.module';
-import { NewDashboardsComponent } from './pages/new-dashboards/new-dashboards.component';
-import { NewBoardsComponent } from './pages/new-boards/new-boards.component';
+
+import { ModalComponent } from './shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +20,7 @@ import { NewBoardsComponent } from './pages/new-boards/new-boards.component';
     BoardComponent,
     PathNotFoundComponent,
     HeaderComponent,
-    NewDashboardsComponent,
-    NewBoardsComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,

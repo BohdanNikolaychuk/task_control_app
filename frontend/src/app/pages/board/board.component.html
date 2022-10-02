@@ -1,11 +1,31 @@
 <div class="container">
-  <h3 class="title">board</h3>
+  <h3 class="title">boards</h3>
+  <app-modal [show]="showModal" [customClass]="'custom_modal_class'">
+    <div class="new__dash">
+      <h1 class="title">Create a new task in board</h1>
+      <form [formGroup]="form" (ngSubmit)="createBoard(form.value)">
+        <input
+          class="input"
+          type="text"
+          formControlName="name"
+          placeholder="Enter board name..."
+        />
+        <div class="buttons">
+          <button class="button__cancel" (click)="toggleModal('')">
+            Cancel
+          </button>
+          <button class="button__create" [disabled]="!form.valid" type="submit">
+            Create
+          </button>
+        </div>
+      </form>
+    </div>
+  </app-modal>
   <app-button [routerLink]="['/']" name="back"></app-button>
-
   <div class="kanban__board">
     <div class="kanban__block">
       <h3 class="title">To Do</h3>
-      <div class="add__button" routerLink="../new-board">
+      <div class="add__button" (click)="toggleModal('TODO')">
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards">
@@ -16,7 +36,7 @@
     </div>
     <div class="kanban__block">
       <h3 class="title">In Progress</h3>
-      <div class="add__button">
+      <div class="add__button" (click)="toggleModal('INPROGRESS')">
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards">
@@ -27,7 +47,7 @@
     </div>
     <div class="kanban__block">
       <h3 class="title">Done</h3>
-      <div class="add__button">
+      <div class="add__button" (click)="toggleModal('DONE')">
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards">
