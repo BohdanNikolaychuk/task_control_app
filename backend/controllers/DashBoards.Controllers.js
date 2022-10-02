@@ -39,9 +39,12 @@ class DashBoardsController {
   }
   async deleteDashBoard(req, res, next) {
     try {
+
       DashBoards.findByIdAndDelete({ _id: req.params.id }).then((removeDashBoard) => {
         res.send(removeDashBoard);
+        Boards.find({ dashId: req.params.id }).remove().exec();
       });
+
     } catch (error) {
 
     }
