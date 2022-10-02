@@ -1,6 +1,6 @@
 
 const { DashBoards } = require('../models/Dashboards.Model');
-
+const { Boards } = require('../models/Boards.Model');
 class DashBoardsController {
   async getDashBoards(req, res, next) {
     try {
@@ -11,14 +11,17 @@ class DashBoardsController {
       res.send(error)
     }
   }
+
   async createNewDashBoard(req, res, next) {
     try {
       let { name, desc } = req.body;
       let newDashBoard = new DashBoards({
         name,
-        desc
+        desc,
+
       });
       newDashBoard.save().then((dashboards) => {
+
         res.send(dashboards);
       });
     } catch (error) {

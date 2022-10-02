@@ -6,6 +6,7 @@ class BoardsController {
     try {
       Boards.find({
         dashId: req.params.dashId,
+
       }).then((boards) => {
         res.send(boards);
       });
@@ -16,9 +17,11 @@ class BoardsController {
   async createBoard(req, res, next) {
     try {
       let name = req.body.name;
+      let status = req.body.status;
       let newBoard = new Boards({
         name,
         dashId: req.params.dashId,
+        status,
       });
       newBoard.save().then((newAddBoard) => {
         res.send(newAddBoard);

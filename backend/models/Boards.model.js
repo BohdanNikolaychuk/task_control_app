@@ -10,7 +10,6 @@ const BoardSchema = new mongoose.Schema({
   dashId: {
     type: mongoose.Types.ObjectId,
     required: true,
-
   },
   status: {
     type: String,
