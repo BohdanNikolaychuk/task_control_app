@@ -28,9 +28,10 @@
       <div class="add__button" (click)="toggleModal('TODO')">
         <span class="sub__title">add new task</span>
       </div>
-      <ng-container *ngFor="let board of boards">
+      <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'TODO'">
           <span>{{ board.name }}</span>
+          <button (click)="deleteBoard(board._id, i)">Delete</button>
         </div>
       </ng-container>
     </div>
@@ -39,9 +40,10 @@
       <div class="add__button" (click)="toggleModal('INPROGRESS')">
         <span class="sub__title">add new task</span>
       </div>
-      <ng-container *ngFor="let board of boards">
+      <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'INPROGRESS'">
           <span>{{ board.name }}</span>
+          <button (click)="deleteBoard(board._id, i)">Delete</button>
         </div>
       </ng-container>
     </div>
@@ -50,9 +52,10 @@
       <div class="add__button" (click)="toggleModal('DONE')">
         <span class="sub__title">add new task</span>
       </div>
-      <ng-container *ngFor="let board of boards">
+      <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'DONE'">
           <span>{{ board.name }}</span>
+          <button (click)="deleteBoard(board._id, i)">Delete</button>
         </div>
       </ng-container>
     </div>

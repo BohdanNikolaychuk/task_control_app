@@ -27,6 +27,9 @@ export class DashboardService {
   getBoard(dashId: string) {
     return this.webRequest.get(`dashboards/${dashId}/boards`);
   }
+  deleteBoard(dashId: string, boardId: string) {
+    return this.webRequest.delete(`dashboards/${dashId}/boards/${boardId}`);
+  }
 
   createBoard(dashId: string, name: Object, status: string) {
     return this.webRequest.post(`dashboards/${dashId}/boards`, {

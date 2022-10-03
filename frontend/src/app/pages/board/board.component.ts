@@ -41,6 +41,14 @@ export class BoardComponent implements OnInit {
     this.selectedStatus = status;
   };
 
+  deleteBoard(boardId: string, index: number) {
+    this.dashboardService
+      .deleteBoard(this.selectedID, boardId)
+      .subscribe((deleteBoard) => {
+        this.boards.splice(index, 1);
+      });
+  }
+
   createBoard(formData: IBoard) {
     this.dashboardService
       .createBoard(this.selectedID, formData.name, this.selectedStatus)
