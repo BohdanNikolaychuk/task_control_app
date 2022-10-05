@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IBoard } from 'src/app/core/interface/IForm';
@@ -15,6 +15,8 @@ export class BoardComponent implements OnInit {
   form!: FormGroup;
   showModal = false;
   selectedStatus!: string;
+  showMenu = false;
+  @Output() saveContactPerson = new EventEmitter<String>();
 
   constructor(
     private dashboardService: DashboardService,
@@ -36,10 +38,23 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  toggleMenu = (index: number) => {
+    this.showMenu = !this.showMenu;
+    console.log(index);
+  };
+
   toggleModal = (status: string) => {
     this.showModal = !this.showModal;
     this.selectedStatus = status;
   };
+
+  editBoard(boardId: string, name: string) {
+    this.dashboardService
+      .editBoard(this.selectedID, boardId, name)
+      .subscribe((editBoard) => {
+        console.log(editBoard);
+      });
+  }
 
   deleteBoard(boardId: string, index: number) {
     this.dashboardService

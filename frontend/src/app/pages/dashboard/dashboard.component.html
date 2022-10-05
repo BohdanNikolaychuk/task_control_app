@@ -2,8 +2,16 @@
   <div class="info">
     <h3 class="title">dashboard</h3>
     <div class="filter">
-      <app-button name="filter"></app-button>
-      <app-button name="sort by Dropdown"></app-button>
+      <!-- <app-input [(ngModel)]="Name" name="Search..."></app-input> -->
+      <input [(ngModel)]="Name" type="text" class="input" />
+
+      <select>
+        <option value="choix-2">Inception</option>
+        <option value="choix-3">Godzilla</option>
+        <option value="choix-4">Back to the future</option>
+        <option value="choix-5">Shutter Island</option>
+      </select>
+
       <app-button name="ASC"></app-button>
       <app-button name="DESC"></app-button>
     </div>
@@ -40,7 +48,10 @@
     <button class="add__dashboard sub__title" (click)="toggleModal()">
       add new dashboard
     </button>
-    <div class="dashboard" *ngFor="let dashboard of dashboards; let i = index">
+    <div
+      class="dashboard"
+      *ngFor="let dashboard of dashboards | filter: Name:'name'; let i = index"
+    >
       <div class="dashboard__info">
         <input
           #inputName

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { map, Observable, publishReplay, shareReplay } from 'rxjs';
 import { IForm } from 'src/app/core/interface/IForm';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
@@ -12,6 +13,7 @@ export class DashboardComponent implements OnInit {
   dashboards!: any[];
   boards!: any[];
   showModal = false;
+  Name = '';
   form!: FormGroup;
 
   constructor(private dashboardService: DashboardService) {}
@@ -19,7 +21,9 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.dashboardService.getDashBoards().subscribe((dashboards: any) => {
       this.dashboards = dashboards;
+      console.log(this.dashboards);
     });
+
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       desc: new FormControl(''),

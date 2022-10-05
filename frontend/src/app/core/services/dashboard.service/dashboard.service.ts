@@ -30,6 +30,11 @@ export class DashboardService {
   deleteBoard(dashId: string, boardId: string) {
     return this.webRequest.delete(`dashboards/${dashId}/boards/${boardId}`);
   }
+  editBoard(dashId: string, boardId: string, name: string) {
+    return this.webRequest.patch(`dashboards/${dashId}/boards/${boardId}`, {
+      name,
+    });
+  }
 
   createBoard(dashId: string, name: Object, status: string) {
     return this.webRequest.post(`dashboards/${dashId}/boards`, {

@@ -30,8 +30,22 @@
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'TODO'">
-          <span>{{ board.name }}</span>
+          <input
+            #inputName
+            class="board__info-title"
+            placeholder="{{ board.name }}"
+          />
           <button (click)="deleteBoard(board._id, i)">Delete</button>
+          <button (click)="editBoard(board._id, inputName.value)">Edit</button>
+          <!-- <div class="dropdown">
+            <div class="dropbtn" (click)="toggleMenu(i)"></div>
+
+            <div *ngIf="showMenu" class="dropdown-content">
+              <a>Home</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+            </div>
+          </div> -->
         </div>
       </ng-container>
     </div>
@@ -43,7 +57,7 @@
       <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'INPROGRESS'">
           <span>{{ board.name }}</span>
-          <button (click)="deleteBoard(board._id, i)">Delete</button>
+          <!-- <button (click)="deleteBoard(board._id, i)">Delete</button> -->
         </div>
       </ng-container>
     </div>
@@ -55,7 +69,7 @@
       <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'DONE'">
           <span>{{ board.name }}</span>
-          <button (click)="deleteBoard(board._id, i)">Delete</button>
+          <!-- <button (click)="deleteBoard(board._id, i)">Delete</button> -->
         </div>
       </ng-container>
     </div>
