@@ -6,14 +6,11 @@
       <input [(ngModel)]="Name" type="text" class="input" />
 
       <select>
-        <option value="choix-2">Inception</option>
-        <option value="choix-3">Godzilla</option>
-        <option value="choix-4">Back to the future</option>
-        <option value="choix-5">Shutter Island</option>
+        <option value="choix-2">By name ASC</option>
+        <option value="choix-3">By date ASC</option>
+        <option value="choix-2">By name DESC</option>
+        <option value="choix-3">By date DESC</option>
       </select>
-
-      <app-button name="ASC"></app-button>
-      <app-button name="DESC"></app-button>
     </div>
   </div>
   <app-modal [show]="showModal" [customClass]="'custom_modal_class'">

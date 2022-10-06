@@ -15,6 +15,7 @@ import { ModalComponent } from './shared/modal/modal.component';
 import { InputComponent } from './shared/input/input.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoginComponent } from './pages/login/login.component';
     InputComponent,
     FilterPipe,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
