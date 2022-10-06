@@ -42,7 +42,7 @@ class BoardsController {
       res.send(error)
     }
   }
-  async deleteBoar(req, res, next) {
+  async deleteBoard(req, res, next) {
     try {
       Boards.findOneAndRemove({ _id: req.params.boardId, dashId: req.params.dashId }).then(
         (removeBoards) => {

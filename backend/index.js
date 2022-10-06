@@ -16,12 +16,9 @@ const DashBoards_Router = require('./routers/DashBoards.Router');
 const Boards_Router = require('./routers/Boards.Router');
 const Auth_Router = require('./routers/Auth.Router');
 
-
-
-
 app.use('/', DashBoards_Router);
 app.use('/', Boards_Router);
-// app.use('/', Auth_Router);
+app.use('/', Auth_Router);
 const start = async () => {
   try {
     app.listen(8080);

@@ -4,7 +4,7 @@ const { Boards } = require('../models/Boards.Model');
 class DashBoardsController {
   async getDashBoards(req, res, next) {
     try {
-      DashBoards.find({}).then((dashboards) => {
+      DashBoards.find({ userId: req.user.userId }).then((dashboards) => {
         res.send(dashboards);
       });
     } catch (error) {
@@ -18,7 +18,7 @@ class DashBoardsController {
       let newDashBoard = new DashBoards({
         name,
         desc,
-
+        userId: req.user.userId,
       });
       newDashBoard.save().then((dashboards) => {
 
