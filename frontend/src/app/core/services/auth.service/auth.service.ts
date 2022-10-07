@@ -9,8 +9,8 @@ import { ILogin } from './../../interface/IUser';
 })
 export class AuthService {
   constructor(private webRequest: WebRequestService) {}
-
   private token!: string;
+
   login(FormData: ILogin): Observable<{ jwt_token: string }> {
     return this.webRequest.post('login', FormData).pipe(
       tap(({ jwt_token }: any) => {
@@ -20,11 +20,21 @@ export class AuthService {
     );
   }
 
+  logOut() {
+    localStorage.clear();
+  }
+
   setToken(jwt_token: string) {
     this.token = jwt_token;
   }
 
-  gettoken() {
-    return !!localStorage.getItem('SeesionUser');
+  getToken(): string {
+    return this.token;
+  }
+
+  isAuth(): boolean {
+    console.log(!!this.token);
+
+    return !!this.token;
   }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -16,7 +16,8 @@ import { InputComponent } from './shared/input/input.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { AuthService } from 'src/app/core/services/auth.service/auth.service';
+
+import { TokenInterceptor } from './core/interceptor/token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,13 @@ import { AuthService } from 'src/app/core/services/auth.service/auth.service';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor,
+    },
+  ],
   bootstrap: [AppComponent],
   exports: [],
 })
