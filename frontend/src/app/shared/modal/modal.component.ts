@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IForm } from 'src/app/core/interface/IForm';
+import { IDashBoard } from 'src/app/core/interface/IForm';
 import { DashboardService } from 'src/app/core/services/dashboard.service/dashboard.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  createDashBoard(formData: IForm): void {
+  createDashBoard(formData: IDashBoard): void {
     this.dashboardService
       .createDashBoard(formData)
       .subscribe((newDashBoard) => {

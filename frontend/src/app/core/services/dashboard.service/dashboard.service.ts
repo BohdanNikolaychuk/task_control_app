@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IForm } from '../../interface/IForm';
+import { IDashBoard } from '../../interface/IForm';
 import { WebRequestService } from './../web-request.service/web-request.service';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class DashboardService {
   getDashBoards() {
     return this.webRequest.get('dashboards');
   }
-  createDashBoard(formData: IForm) {
+  createDashBoard(formData: IDashBoard) {
     return this.webRequest.post('dashboards', formData);
   }
   deleteDashBoard(id: string) {

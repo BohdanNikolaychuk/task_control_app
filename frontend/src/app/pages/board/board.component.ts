@@ -16,7 +16,6 @@ export class BoardComponent implements OnInit {
   showModal = false;
   selectedStatus!: string;
   showMenu = false;
-  @Output() saveContactPerson = new EventEmitter<String>();
 
   constructor(
     private dashboardService: DashboardService,

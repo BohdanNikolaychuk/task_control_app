@@ -1,1 +1,25 @@
-<p>register works!</p>
+<div class="container">
+  <h1 class="title">Register</h1>
+  <form>
+    <input
+      class="input"
+      type="text"
+      placeholder="Enter full name..."
+      formControlName="name"
+      required
+      minlength="2"
+    />
+    <input
+      class="input"
+      type="password"
+      placeholder="Enter password.."
+      formControlName="desc"
+      required
+      minlength="2"
+    />
+    <div class="buttons">
+      <button class="button__cancel">Cancel</button>
+      <button type="submit" class="button__create">Create</button>
+    </div>
+  </form>
+</div>

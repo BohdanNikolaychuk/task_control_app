@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { map, Observable, publishReplay, shareReplay } from 'rxjs';
-import { IForm } from 'src/app/core/interface/IForm';
+
+import { IDashBoard } from 'src/app/core/interface/IForm';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     this.showModal = !this.showModal;
   };
 
-  createDashBoard(formData: IForm): void {
+  createDashBoard(formData: IDashBoard): void {
     this.dashboardService
       .createDashBoard(formData)
       .subscribe((newDashBoard) => {

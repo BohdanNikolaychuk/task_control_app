@@ -1,4 +1,4 @@
-export interface IForm {
+export interface IDashBoard {
   name: string;
   desc: string;
 }

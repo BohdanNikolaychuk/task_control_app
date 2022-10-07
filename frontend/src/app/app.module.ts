@@ -16,7 +16,7 @@ import { InputComponent } from './shared/input/input.component';
 import { FilterPipe } from './core/pipes/filter.pipe';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-
+import { AuthService } from 'src/app/core/services/auth.service/auth.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +38,7 @@ import { RegisterComponent } from './pages/register/register.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   exports: [],
 })
