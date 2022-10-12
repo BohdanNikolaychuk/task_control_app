@@ -1,5 +1,6 @@
 .info {
   display: flex;
+  padding-top: 20px;
   align-items: center;
   justify-content: space-between;
 }
@@ -49,7 +50,7 @@
   }
 }
 
-input {
+.input {
   background-color: inherit;
   border-radius: 16px;
   text-align: center;
@@ -62,7 +63,7 @@ input {
   cursor: pointer;
   color: #6a6dcd;
 }
-input::placeholder {
+.input::placeholder {
   color: #6a6dcd;
 }
 
@@ -82,7 +83,7 @@ select {
 
 select:hover {
   background-color: transparent;
-  color: white;
+  color: #6a6dcd;
 }
 
 select option {

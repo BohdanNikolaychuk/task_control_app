@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { IDashBoard } from '../../interface/IForm';
+
+import { IBoard } from '../../interface/IBoard';
+import { IDashBoard } from '../../interface/IDashBoard';
+import { IDashBoardForm } from '../../interface/IForm';
 import { WebRequestService } from './../web-request.service/web-request.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +15,7 @@ export class DashboardService {
   getDashBoards() {
     return this.webRequest.get('dashboards');
   }
-  createDashBoard(formData: IDashBoard) {
+  createDashBoard(formData: IDashBoardForm) {
     return this.webRequest.post('dashboards', formData);
   }
   deleteDashBoard(id: string) {

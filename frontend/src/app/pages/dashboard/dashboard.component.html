@@ -3,7 +3,12 @@
     <h3 class="title">dashboard</h3>
     <div class="filter">
       <!-- <app-input [(ngModel)]="Name" name="Search..."></app-input> -->
-      <input [(ngModel)]="Name" type="text" class="input" />
+      <input
+        [(ngModel)]="Name"
+        type="text"
+        class="input__modal"
+        placeholder="Search..."
+      />
 
       <select>
         <option value="choix-2">By name ASC</option>
@@ -17,7 +22,7 @@
     <h1 class="title">Create a new dashboard</h1>
     <form [formGroup]="form" (ngSubmit)="createDashBoard(form.value)">
       <input
-        class="input"
+        class="input__modal"
         type="text"
         placeholder="Enter dashboard name..."
         formControlName="name"
@@ -25,7 +30,7 @@
         minlength="2"
       />
       <input
-        class="input"
+        class="input__modal"
         type="text"
         placeholder="Enter description..."
         formControlName="desc"
@@ -47,7 +52,11 @@
     </button>
     <div
       class="dashboard"
-      *ngFor="let dashboard of dashboards | filter: Name:'name'; let i = index"
+      *ngFor="
+        let dashboard of dashboards | filter: Name:'name';
+        let i = index;
+        trackBy: identify
+      "
     >
       <div class="dashboard__info">
         <input

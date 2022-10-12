@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { IDashBoard } from 'src/app/core/interface/IDashBoard';
 
-import { IDashBoard } from 'src/app/core/interface/IForm';
+import { IDashBoardForm } from 'src/app/core/interface/IForm';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
 @Component({
@@ -10,8 +11,8 @@ import { DashboardService } from './../../core/services/dashboard.service/dashbo
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  dashboards!: any[];
-  boards!: any[];
+  dashboards!: IDashBoard[];
+
   showModal = false;
   Name = '';
   form!: FormGroup;
@@ -20,8 +21,9 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.dashboardService.getDashBoards().subscribe((dashboards: any) => {
+      console.log(dashboards);
+
       this.dashboards = dashboards;
-      console.log(this.dashboards);
     });
 
     this.form = new FormGroup({
@@ -33,10 +35,10 @@ export class DashboardComponent implements OnInit {
     this.showModal = !this.showModal;
   };
 
-  createDashBoard(formData: IDashBoard): void {
+  createDashBoard(formData: IDashBoardForm): void {
     this.dashboardService
       .createDashBoard(formData)
-      .subscribe((newDashBoard) => {
+      .subscribe((newDashBoard: any) => {
         this.dashboards.push(newDashBoard);
         this.form.reset();
         this.showModal = false;
@@ -51,8 +53,11 @@ export class DashboardComponent implements OnInit {
   }
 
   editDashBoards(id: string, name: string) {
-    this.dashboardService
-      .editDashBoard(id, name)
-      .subscribe((editDashBoard) => {});
+    this.dashboardService.editDashBoard(id, name).subscribe((editDashBoard) => {
+      console.log(editDashBoard);
+    });
+  }
+  identify(index: number, dashboard: object) {
+    return dashboard;
   }
 }

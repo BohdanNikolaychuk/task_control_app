@@ -103,6 +103,7 @@ section {
 }
 body {
   line-height: 1;
+  font-family: sans-serif;
 }
 ol,
 ul {
@@ -167,7 +168,6 @@ html {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   padding: 15px 30px;
-  margin: 10px;
   cursor: pointer;
   color: #fff;
 }
@@ -186,21 +186,35 @@ html {
   color: #6a6dcd;
 }
 
-.input {
-  margin-top: 20px;
-  width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid #fff;
-  outline: none;
-  background: transparent;
-}
-
 .block {
   padding-top: 50px;
   width: 50%;
   margin: 0 auto;
+}
+
+.input__modal {
+  background: none;
+  color: #6a6dcd;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #6a6dcd;
+  outline: none;
+}
+
+.card {
+  background: #262626;
+  border-radius: 8px;
+  box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+  height: 410px;
+  margin: 6rem auto 8.1rem auto;
+  max-width: 420px;
+}
+
+.card__content {
+  padding: 12px 44px;
 }

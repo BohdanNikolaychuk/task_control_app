@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { IBoard } from 'src/app/core/interface/IForm';
+import { IBoard } from 'src/app/core/interface/IBoard';
+import { IBoardForm } from 'src/app/core/interface/IForm';
 import { DashboardService } from 'src/app/core/services/dashboard.service/dashboard.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -32,6 +34,7 @@ export class BoardComponent implements OnInit {
       this.dashboardService
         .getBoard(params['dashId'])
         .subscribe((boards: any) => {
+          console.log(boards);
           this.boards = boards;
         });
     });
@@ -63,7 +66,7 @@ export class BoardComponent implements OnInit {
       });
   }
 
-  createBoard(formData: IBoard) {
+  createBoard(formData: IBoardForm) {
     this.dashboardService
       .createBoard(this.selectedID, formData.name, this.selectedStatus)
       .subscribe((newBoard) => {

@@ -33,8 +33,6 @@ export class AuthService {
   }
 
   isAuth(): boolean {
-    console.log(!!this.token);
-
     return !!this.token;
   }
 }

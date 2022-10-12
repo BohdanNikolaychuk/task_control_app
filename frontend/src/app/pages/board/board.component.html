@@ -5,7 +5,7 @@
       <h1 class="title">Create a new task in board</h1>
       <form [formGroup]="form" (ngSubmit)="createBoard(form.value)">
         <input
-          class="input"
+          class="input__modal"
           type="text"
           formControlName="name"
           placeholder="Enter board name..."
@@ -56,8 +56,13 @@
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'INPROGRESS'">
-          <span>{{ board.name }}</span>
-          <!-- <button (click)="deleteBoard(board._id, i)">Delete</button> -->
+          <input
+            #inputName
+            class="board__info-title"
+            placeholder="{{ board.name }}"
+          />
+          <button (click)="deleteBoard(board._id, i)">Delete</button>
+          <button (click)="editBoard(board._id, inputName.value)">Edit</button>
         </div>
       </ng-container>
     </div>
@@ -68,8 +73,13 @@
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
         <div class="task" *ngIf="board.status === 'DONE'">
-          <span>{{ board.name }}</span>
-          <!-- <button (click)="deleteBoard(board._id, i)">Delete</button> -->
+          <input
+            #inputName
+            class="board__info-title"
+            placeholder="{{ board.name }}"
+          />
+          <button (click)="deleteBoard(board._id, i)">Delete</button>
+          <button (click)="editBoard(board._id, inputName.value)">Edit</button>
         </div>
       </ng-container>
     </div>
