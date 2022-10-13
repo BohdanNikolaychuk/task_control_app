@@ -76,4 +76,8 @@ export class BoardComponent implements OnInit {
         this.selectedStatus = '';
       });
   }
+
+  click(e: Event) {
+    console.log(e.target);
+  }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ILogin } from 'src/app/core/interface/IUser';
 import { AuthService } from 'src/app/core/services/auth.service/auth.service';
 
 @Component({
@@ -17,11 +18,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      fullName: new FormControl('', [
+      fullName: new FormControl(null, [
         Validators.required,
         Validators.minLength(2),
       ]),
-      password: new FormControl('', [
+      password: new FormControl(null, [
         Validators.required,
         Validators.minLength(1),
       ]),
@@ -34,10 +35,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(formData: any) {
+  login(formData: ILogin) {
     this.subscription$ = this.authService
       .login(formData)
-      .subscribe((newDashBoard: any) => {
+      .subscribe((newDashBoard) => {
         this.router.navigate(['dashboards']);
       });
   }

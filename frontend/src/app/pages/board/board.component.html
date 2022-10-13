@@ -29,7 +29,11 @@
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
-        <div class="task" *ngIf="board.status === 'TODO'">
+        <div
+          (click)="click($event)"
+          class="task"
+          *ngIf="board.status === 'TODO'"
+        >
           <input
             #inputName
             class="board__info-title"
@@ -37,15 +41,6 @@
           />
           <button (click)="deleteBoard(board._id, i)">Delete</button>
           <button (click)="editBoard(board._id, inputName.value)">Edit</button>
-          <!-- <div class="dropdown">
-            <div class="dropbtn" (click)="toggleMenu(i)"></div>
-
-            <div *ngIf="showMenu" class="dropdown-content">
-              <a>Home</a>
-              <a href="#about">About</a>
-              <a href="#contact">Contact</a>
-            </div>
-          </div> -->
         </div>
       </ng-container>
     </div>
@@ -55,7 +50,11 @@
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
-        <div class="task" *ngIf="board.status === 'INPROGRESS'">
+        <div
+          draggable="true"
+          class="task"
+          *ngIf="board.status === 'INPROGRESS'"
+        >
           <input
             #inputName
             class="board__info-title"
@@ -72,7 +71,7 @@
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
-        <div class="task" *ngIf="board.status === 'DONE'">
+        <div draggable="true" class="task" *ngIf="board.status === 'DONE'">
           <input
             #inputName
             class="board__info-title"

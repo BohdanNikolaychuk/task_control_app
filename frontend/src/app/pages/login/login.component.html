@@ -11,6 +11,17 @@
           required
           minlength="2"
         />
+        <p
+          class="text__error"
+          *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched"
+        >
+          <span *ngIf="form.get('fullName')?.errors?.['required']">
+            Full name is required</span
+          >
+          <span *ngIf="form.get('fullName')?.errors?.['minlength']">
+            full Name is short</span
+          >
+        </p>
         <input
           class="input__modal"
           type="password"
@@ -20,8 +31,24 @@
           minlength="2"
           autocomplete="off"
         />
+        <p
+          class="text__error"
+          *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+        >
+          <span *ngIf="form.get('password')?.errors?.['required']">
+            Password is required</span
+          >
+          <span *ngIf="form.get('password')?.errors?.['minlength']">
+            Password is short</span
+          >
+        </p>
+
         <div>
-          <button [disabled]="!form.valid" type="submit" class="button__create">
+          <button
+            [disabled]="form.invalid"
+            type="submit"
+            class="button__create"
+          >
             Login
           </button>
         </div>
