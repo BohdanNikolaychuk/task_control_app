@@ -40,30 +40,4 @@ export class DashboardService {
       }
     );
   }
-
-  // boards
-  //_____________
-  getBoard(dashId: string) {
-    return this.http.get(`${this.MAIN_URL}dashboards/${dashId}/boards`);
-  }
-  deleteBoard(dashId: string, boardId: string) {
-    return this.http.delete(
-      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`
-    );
-  }
-  editBoard(dashId: string, boardId: string, name: string) {
-    return this.http.patch(
-      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`,
-      {
-        name,
-      }
-    );
-  }
-
-  createBoard(dashId: string, name: Object, status: string) {
-    return this.http.post(`${this.MAIN_URL}dashboards/${dashId}/boards`, {
-      name,
-      status,
-    });
-  }
 }

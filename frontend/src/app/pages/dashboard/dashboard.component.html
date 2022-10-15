@@ -3,7 +3,7 @@
     <h3 class="title">dashboard</h3>
     <div class="filter">
       <input
-        [(ngModel)]="Name"
+        [(ngModel)]="SearchValue"
         type="text"
         class="input__modal"
         placeholder="Filter..."
@@ -11,12 +11,12 @@
 
       <select [(ngModel)]="SortByParam">
         <option value="name">By name</option>
-        <option value="date">By date</option>
+        <option value="desc">By description</option>
       </select>
 
-      <button (click)="onSortDirection()">
-        <p *ngIf="SortDirection === 'asc'">Sorting by ASC</p>
-        <p *ngIf="SortDirection === 'desc'">Sorting by DESC</p>
+      <button class="button__cancel" (click)="onSortDirection()">
+        <span *ngIf="SortDirection === 'asc'">Sorting by ASC</span>
+        <span *ngIf="SortDirection === 'desc'">Sorting by DESC</span>
       </button>
     </div>
   </div>
@@ -56,8 +56,9 @@
     <div
       class="dashboard"
       *ngFor="
-        let dashboard of dashboards
-          | filter: Name:'name'
+        let dashboard of dashboards$
+          | async
+          | filter: SearchValue:'name'
           | sort: [SortByParam, SortDirection];
         let i = index;
         trackBy: trackByFn
@@ -68,7 +69,7 @@
           #inputName
           class="dashboard__info-title"
           minlength="2"
-          placeholder="{{ dashboard.name }}"
+          value="{{ dashboard.name }}"
         />
         <p class="dashboard__info-text">{{ dashboard.desc }}</p>
         <p class="dashboard__info-text">

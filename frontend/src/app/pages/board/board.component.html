@@ -28,18 +28,13 @@
       <div class="add__button" (click)="toggleModal('TODO')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board" (drop)="drop($event)" (dragover)="allowDrop($event)">
+      <div class="board">
         <ng-container *ngFor="let board of boards; let i = index">
-          <div
-            class="task"
-            draggable="true"
-            (dragstart)="drag($event, board._id)"
-            *ngIf="board.status === 'TODO'"
-          >
+          <div class="task" draggable="true" *ngIf="board.status === 'TODO'">
             <input
               #inputName
               class="board__info-title"
-              placeholder="{{ board.name }}"
+              value="{{ board.name }}"
             />
             <button (click)="deleteBoard(board._id, i)">Delete</button>
             <button (click)="editBoard(board._id, inputName.value)">
@@ -54,7 +49,7 @@
       <div class="add__button" (click)="toggleModal('INPROGRESS')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board" (drop)="drop($event)" (dragover)="allowDrop($event)">
+      <div class="board">
         <ng-container *ngFor="let board of boards; let i = index">
           <div
             draggable="true"
@@ -64,10 +59,15 @@
             <input
               #inputName
               class="board__info-title"
-              placeholder="{{ board.name }}"
+              value="{{ board.name }}"
             />
-            <button (click)="deleteBoard(board._id, i)">Delete</button>
-            <button (click)="editBoard(board._id, inputName.value)">
+            <button class="button" (click)="deleteBoard(board._id, i)">
+              Delete
+            </button>
+            <button
+              class="button"
+              (click)="editBoard(board._id, inputName.value)"
+            >
               Edit
             </button>
           </div>
@@ -80,12 +80,12 @@
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
-        <div class="board" (drop)="drop($event)" (dragover)="allowDrop($event)">
+        <div class="board">
           <div draggable="true" class="task" *ngIf="board.status === 'DONE'">
             <input
               #inputName
               class="board__info-title"
-              placeholder="{{ board.name }}"
+              value="{{ board.name }}"
             />
             <button (click)="deleteBoard(board._id, i)">Delete</button>
             <button (click)="editBoard(board._id, inputName.value)">

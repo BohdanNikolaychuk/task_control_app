@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input',
@@ -6,7 +6,10 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
-  @Input() name!: string;
+  @Input() ngModel!: string;
+
+  @Output()
+  myPropChange = new EventEmitter<string>();
   constructor() {}
 
   ngOnInit(): void {}

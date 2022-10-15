@@ -5,6 +5,7 @@ import { IDashBoardForm } from 'src/app/core/interface/IForm';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
 import { IDashBoard } from './../../core/interface/IDashBoard';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +13,11 @@ import { IDashBoard } from './../../core/interface/IDashBoard';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  dashboards$!: Observable<IDashBoard[]>;
   dashboards!: IDashBoard[];
-
   showModal = false;
-  Name = '';
-  SortByParam = '';
+  SearchValue = '';
+  SortByParam = 'name';
   SortDirection = 'asc';
 
   form!: FormGroup;
@@ -37,11 +38,8 @@ export class DashboardComponent implements OnInit {
   };
 
   getDashBoards() {
-    this.dashboardService
-      .getDashBoards()
-      .subscribe((dashboards: IDashBoard[]) => {
-        this.dashboards = dashboards;
-      });
+    this.dashboards$ = this.dashboardService.getDashBoards();
+    this.dashboards$.subscribe((dashboards) => (this.dashboards = dashboards));
   }
 
   createDashBoard(formData: IDashBoardForm): void {
@@ -58,16 +56,13 @@ export class DashboardComponent implements OnInit {
     this.dashboardService
       .deleteDashBoard(id)
       .subscribe((newDashBoard: IDashBoard) => {
-        console.log(newDashBoard);
         this.dashboards.splice(i, 1);
       });
   }
   editDashBoards(id: string, name: string) {
     this.dashboardService
       .editDashBoard(id, name)
-      .subscribe((editDashBoard: string) => {
-        console.log(editDashBoard);
-      });
+      .subscribe((editDashBoard: string) => {});
   }
 
   //TrackBy

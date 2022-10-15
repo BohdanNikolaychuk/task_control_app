@@ -3,8 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IBoard } from 'src/app/core/interface/IBoard';
 import { IBoardForm } from 'src/app/core/interface/IForm';
-import { DashboardService } from 'src/app/core/services/dashboard.service/dashboard.service';
-import { Observable } from 'rxjs';
+
+import { BoardService } from 'src/app/core/services/board.service/board.service';
 
 @Component({
   selector: 'app-board',
@@ -17,10 +17,9 @@ export class BoardComponent implements OnInit {
   form!: FormGroup;
   showModal = false;
   selectedStatus!: string;
-  showMenu = false;
 
   constructor(
-    private dashboardService: DashboardService,
+    private boardService: BoardService,
     private route: ActivatedRoute
   ) {}
 
@@ -31,19 +30,11 @@ export class BoardComponent implements OnInit {
 
     this.route.params.subscribe((params: Params) => {
       this.selectedID = params['dashId'];
-      this.dashboardService
-        .getBoard(params['dashId'])
-        .subscribe((boards: any) => {
-          console.log(boards);
-          this.boards = boards;
-        });
+      this.boardService.getBoard(params['dashId']).subscribe((boards: any) => {
+        this.boards = boards;
+      });
     });
   }
-
-  toggleMenu = (index: number) => {
-    this.showMenu = !this.showMenu;
-    console.log(index);
-  };
 
   toggleModal = (status: string) => {
     this.showModal = !this.showModal;
@@ -51,7 +42,7 @@ export class BoardComponent implements OnInit {
   };
 
   editBoard(boardId: string, name: string) {
-    this.dashboardService
+    this.boardService
       .editBoard(this.selectedID, boardId, name)
       .subscribe((editBoard) => {
         console.log(editBoard);
@@ -59,7 +50,7 @@ export class BoardComponent implements OnInit {
   }
 
   deleteBoard(boardId: string, index: number) {
-    this.dashboardService
+    this.boardService
       .deleteBoard(this.selectedID, boardId)
       .subscribe((deleteBoard) => {
         this.boards.splice(index, 1);
@@ -67,7 +58,7 @@ export class BoardComponent implements OnInit {
   }
 
   createBoard(formData: IBoardForm) {
-    this.dashboardService
+    this.boardService
       .createBoard(this.selectedID, formData.name, this.selectedStatus)
       .subscribe((newBoard) => {
         this.boards.push(newBoard);
@@ -75,17 +66,5 @@ export class BoardComponent implements OnInit {
         this.form.reset();
         this.selectedStatus = '';
       });
-  }
-
-  drag(e, id) {
-    console.log(e.target, id);
-  }
-
-  allowDrop(e) {
-    console.log(e.target);
-  }
-
-  drop(e) {
-    console.log(e.target);
   }
 }

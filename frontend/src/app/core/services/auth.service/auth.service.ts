@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
-import { ILogin } from './../../interface/IUser';
+import { ILogin, IRegister } from './../../interface/IUser';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,11 @@ export class AuthService {
     this.MAIN_URL = environment.MIAN_URL;
   }
 
-  register() {}
+  register(FormData: IRegister) {
+    console.log(FormData);
+
+    return this.http.post(`${this.MAIN_URL}register`, FormData);
+  }
 
   login(FormData: ILogin): Observable<{ jwt_token: string }> {
     return this.http.post(`${this.MAIN_URL}login`, FormData).pipe(
