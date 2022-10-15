@@ -18,6 +18,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
+import { SortPipe } from './core/pipes/sort.pipe/sort.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { TokenInterceptor } from './core/interceptor/token.interceptor';
     FilterPipe,
     LoginComponent,
     RegisterComponent,
+    SortPipe,
   ],
   imports: [
     BrowserModule,

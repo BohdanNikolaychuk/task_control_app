@@ -2,20 +2,22 @@
   <div class="info">
     <h3 class="title">dashboard</h3>
     <div class="filter">
-      <!-- <app-input [(ngModel)]="Name" name="Search..."></app-input> -->
       <input
         [(ngModel)]="Name"
         type="text"
         class="input__modal"
-        placeholder="Search..."
+        placeholder="Filter..."
       />
 
-      <select>
-        <option value="choix-2">By name ASC</option>
-        <option value="choix-3">By date ASC</option>
-        <option value="choix-2">By name DESC</option>
-        <option value="choix-3">By date DESC</option>
+      <select [(ngModel)]="SortByParam">
+        <option value="name">By name</option>
+        <option value="date">By date</option>
       </select>
+
+      <button (click)="onSortDirection()">
+        <p *ngIf="SortDirection === 'asc'">Sorting by ASC</p>
+        <p *ngIf="SortDirection === 'desc'">Sorting by DESC</p>
+      </button>
     </div>
   </div>
   <app-modal [show]="showModal" [customClass]="'custom_modal_class'">
@@ -45,7 +47,7 @@
       </div>
     </form>
   </app-modal>
-  <!-- routerLink="/new-dash" -->
+
   <div class="dashboards">
     <button class="add__dashboard sub__title" (click)="toggleModal()">
       add new dashboard
@@ -53,7 +55,13 @@
 
     <div
       class="dashboard"
-      *ngFor="let dashboard of dashboards | filter: Name:'name'; let i = index"
+      *ngFor="
+        let dashboard of dashboards
+          | filter: Name:'name'
+          | sort: [SortByParam, SortDirection];
+        let i = index;
+        trackBy: trackByFn
+      "
     >
       <div class="dashboard__info">
         <input

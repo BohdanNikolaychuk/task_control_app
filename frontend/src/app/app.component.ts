@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/core/services/auth.service/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  title = 'task_app';
   constructor(private authService: AuthService) {}
   ngOnInit() {
     const potentialToken = localStorage.getItem('SeesionUser');

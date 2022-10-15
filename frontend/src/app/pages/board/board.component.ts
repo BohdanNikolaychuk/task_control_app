@@ -77,7 +77,15 @@ export class BoardComponent implements OnInit {
       });
   }
 
-  click(e: Event) {
+  drag(e, id) {
+    console.log(e.target, id);
+  }
+
+  allowDrop(e) {
+    console.log(e.target);
+  }
+
+  drop(e) {
     console.log(e.target);
   }
 }

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { IBoard } from '../../interface/IBoard';
 import { IDashBoard } from '../../interface/IDashBoard';
 import { IDashBoardForm } from '../../interface/IForm';
-import { WebRequestService } from './../web-request.service/web-request.service';
-import { Observable, shareReplay, Subject } from 'rxjs';
+
+import { Observable, shareReplay } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class DashboardService {
   public MAIN_URL!: string;
 
-  constructor(private webRequest: WebRequestService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.MAIN_URL = environment.MIAN_URL;
   }
 
@@ -45,19 +44,24 @@ export class DashboardService {
   // boards
   //_____________
   getBoard(dashId: string) {
-    return this.webRequest.get(`dashboards/${dashId}/boards`);
+    return this.http.get(`${this.MAIN_URL}dashboards/${dashId}/boards`);
   }
   deleteBoard(dashId: string, boardId: string) {
-    return this.webRequest.delete(`dashboards/${dashId}/boards/${boardId}`);
+    return this.http.delete(
+      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`
+    );
   }
   editBoard(dashId: string, boardId: string, name: string) {
-    return this.webRequest.patch(`dashboards/${dashId}/boards/${boardId}`, {
-      name,
-    });
+    return this.http.patch(
+      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`,
+      {
+        name,
+      }
+    );
   }
 
   createBoard(dashId: string, name: Object, status: string) {
-    return this.webRequest.post(`dashboards/${dashId}/boards`, {
+    return this.http.post(`${this.MAIN_URL}dashboards/${dashId}/boards`, {
       name,
       status,
     });

@@ -28,42 +28,51 @@
       <div class="add__button" (click)="toggleModal('TODO')">
         <span class="sub__title">add new task</span>
       </div>
-      <ng-container *ngFor="let board of boards; let i = index">
-        <div
-          (click)="click($event)"
-          class="task"
-          *ngIf="board.status === 'TODO'"
-        >
-          <input
-            #inputName
-            class="board__info-title"
-            placeholder="{{ board.name }}"
-          />
-          <button (click)="deleteBoard(board._id, i)">Delete</button>
-          <button (click)="editBoard(board._id, inputName.value)">Edit</button>
-        </div>
-      </ng-container>
+      <div class="board" (drop)="drop($event)" (dragover)="allowDrop($event)">
+        <ng-container *ngFor="let board of boards; let i = index">
+          <div
+            class="task"
+            draggable="true"
+            (dragstart)="drag($event, board._id)"
+            *ngIf="board.status === 'TODO'"
+          >
+            <input
+              #inputName
+              class="board__info-title"
+              placeholder="{{ board.name }}"
+            />
+            <button (click)="deleteBoard(board._id, i)">Delete</button>
+            <button (click)="editBoard(board._id, inputName.value)">
+              Edit
+            </button>
+          </div>
+        </ng-container>
+      </div>
     </div>
     <div class="kanban__block">
       <h3 class="title">In Progress</h3>
       <div class="add__button" (click)="toggleModal('INPROGRESS')">
         <span class="sub__title">add new task</span>
       </div>
-      <ng-container *ngFor="let board of boards; let i = index">
-        <div
-          draggable="true"
-          class="task"
-          *ngIf="board.status === 'INPROGRESS'"
-        >
-          <input
-            #inputName
-            class="board__info-title"
-            placeholder="{{ board.name }}"
-          />
-          <button (click)="deleteBoard(board._id, i)">Delete</button>
-          <button (click)="editBoard(board._id, inputName.value)">Edit</button>
-        </div>
-      </ng-container>
+      <div class="board" (drop)="drop($event)" (dragover)="allowDrop($event)">
+        <ng-container *ngFor="let board of boards; let i = index">
+          <div
+            draggable="true"
+            class="task"
+            *ngIf="board.status === 'INPROGRESS'"
+          >
+            <input
+              #inputName
+              class="board__info-title"
+              placeholder="{{ board.name }}"
+            />
+            <button (click)="deleteBoard(board._id, i)">Delete</button>
+            <button (click)="editBoard(board._id, inputName.value)">
+              Edit
+            </button>
+          </div>
+        </ng-container>
+      </div>
     </div>
     <div class="kanban__block">
       <h3 class="title">Done</h3>
@@ -71,14 +80,18 @@
         <span class="sub__title">add new task</span>
       </div>
       <ng-container *ngFor="let board of boards; let i = index">
-        <div draggable="true" class="task" *ngIf="board.status === 'DONE'">
-          <input
-            #inputName
-            class="board__info-title"
-            placeholder="{{ board.name }}"
-          />
-          <button (click)="deleteBoard(board._id, i)">Delete</button>
-          <button (click)="editBoard(board._id, inputName.value)">Edit</button>
+        <div class="board" (drop)="drop($event)" (dragover)="allowDrop($event)">
+          <div draggable="true" class="task" *ngIf="board.status === 'DONE'">
+            <input
+              #inputName
+              class="board__info-title"
+              placeholder="{{ board.name }}"
+            />
+            <button (click)="deleteBoard(board._id, i)">Delete</button>
+            <button (click)="editBoard(board._id, inputName.value)">
+              Edit
+            </button>
+          </div>
         </div>
       </ng-container>
     </div>

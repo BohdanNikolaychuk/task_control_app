@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { IDashBoardForm } from 'src/app/core/interface/IForm';
@@ -16,16 +16,15 @@ export class DashboardComponent implements OnInit {
 
   showModal = false;
   Name = '';
+  SortByParam = '';
+  SortDirection = 'asc';
+
   form!: FormGroup;
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-    this.dashboardService
-      .getDashBoards()
-      .subscribe((dashboards: IDashBoard[]) => {
-        this.dashboards = dashboards;
-      });
+    this.getDashBoards();
 
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -37,7 +36,14 @@ export class DashboardComponent implements OnInit {
     this.showModal = !this.showModal;
   };
 
-  //________________________________________
+  getDashBoards() {
+    this.dashboardService
+      .getDashBoards()
+      .subscribe((dashboards: IDashBoard[]) => {
+        this.dashboards = dashboards;
+      });
+  }
+
   createDashBoard(formData: IDashBoardForm): void {
     this.dashboardService
       .createDashBoard(formData)
@@ -56,12 +62,27 @@ export class DashboardComponent implements OnInit {
         this.dashboards.splice(i, 1);
       });
   }
-
   editDashBoards(id: string, name: string) {
     this.dashboardService
       .editDashBoard(id, name)
       .subscribe((editDashBoard: string) => {
         console.log(editDashBoard);
       });
+  }
+
+  //TrackBy
+
+  trackByFn(index: number, dashboard: IDashBoard) {
+    return dashboard._id;
+  }
+
+  //sorting
+
+  onSortDirection() {
+    if (this.SortDirection === 'desc') {
+      this.SortDirection = 'asc';
+    } else {
+      this.SortDirection = 'desc';
+    }
   }
 }
