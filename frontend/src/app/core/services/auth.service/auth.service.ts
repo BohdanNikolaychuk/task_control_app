@@ -19,8 +19,6 @@ export class AuthService {
   }
 
   register(FormData: IRegister) {
-    console.log(FormData);
-
     return this.http.post(`${this.MAIN_URL}register`, FormData);
   }
 
