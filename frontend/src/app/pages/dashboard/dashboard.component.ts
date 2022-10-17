@@ -5,7 +5,7 @@ import { IDashBoardForm } from 'src/app/core/interface/IForm';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
 import { IDashBoard } from './../../core/interface/IDashBoard';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,20 +13,23 @@ import { Observable } from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  dashboards$!: Observable<IDashBoard[]>;
-  dashboards!: IDashBoard[];
+  dashboards: IDashBoard[] = [];
+  //serach
   showModal = false;
   SearchValue = '';
   SortByParam = 'name';
   SortDirection = 'asc';
-
+  //Form
   form!: FormGroup;
+
+  //Rx
+  dashBoardsSub!: Subscription;
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
+    this.dashboardService.getDashBoards();
     this.getDashBoards();
-
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       desc: new FormControl(''),
@@ -38,31 +41,24 @@ export class DashboardComponent implements OnInit {
   };
 
   getDashBoards() {
-    this.dashboards$ = this.dashboardService.getDashBoards();
-    this.dashboards$.subscribe((dashboards) => (this.dashboards = dashboards));
+    this.dashBoardsSub = this.dashboardService
+      .getDashBoardsObs()
+      .subscribe((dashboards) => {
+        this.dashboards = dashboards;
+      });
   }
 
   createDashBoard(formData: IDashBoardForm): void {
-    this.dashboardService
-      .createDashBoard(formData)
-      .subscribe((newDashBoard: IDashBoard) => {
-        this.dashboards.push(newDashBoard);
-        this.form.reset();
-        this.showModal = false;
-      });
+    this.dashboardService.createDashBoard(formData);
+    this.showModal = false;
+    this.form.reset();
   }
 
   deleteDashBoard(id: string, i: number) {
-    this.dashboardService
-      .deleteDashBoard(id)
-      .subscribe((newDashBoard: IDashBoard) => {
-        this.dashboards.splice(i, 1);
-      });
+    this.dashboardService.deleteDashBoard(id);
   }
   editDashBoards(id: string, name: string) {
-    this.dashboardService
-      .editDashBoard(id, name)
-      .subscribe((editDashBoard: string) => {});
+    this.dashboardService.editDashBoard(id, name);
   }
 
   //TrackBy
@@ -70,8 +66,6 @@ export class DashboardComponent implements OnInit {
   trackByFn(index: number, dashboard: IDashBoard) {
     return dashboard._id;
   }
-
-  //sorting
 
   onSortDirection() {
     if (this.SortDirection === 'desc') {

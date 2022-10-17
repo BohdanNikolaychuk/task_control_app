@@ -56,8 +56,7 @@
     <div
       class="dashboard"
       *ngFor="
-        let dashboard of dashboards$
-          | async
+        let dashboard of dashboards
           | filter: SearchValue:'name'
           | sort: [SortByParam, SortDirection];
         let i = index;
