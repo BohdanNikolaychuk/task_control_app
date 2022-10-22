@@ -1,7 +1,8 @@
 const { Boards } = require('../models/Boards.Model');
-
+const { DashBoards } = require('../models/Dashboards.Model');
 
 class BoardsController {
+
   async getBoards(req, res, next) {
     try {
       Boards.find({
@@ -16,15 +17,26 @@ class BoardsController {
   }
   async createBoard(req, res, next) {
     try {
-      let name = req.body.name;
-      let status = req.body.status;
-      let newBoard = new Boards({
+      const { name, status } = req.body;
+      const { dashId } = req.params
+
+      const newBoard = new Boards({
         name,
-        dashId: req.params.dashId,
+        dashId,
         status,
       });
+      const DashBoard = await DashBoards.findById(dashId);
+      DashBoard.tasks = [...DashBoard.tasks, newBoard];
+
+      DashBoard.toDoCount = DashBoard.tasks.filter((task) => task.status === 'TODO').length;
+      DashBoard.inProgressCount = DashBoard.tasks.filter(
+        (task) => task.status === 'INPROGRESS',
+      ).length;
+      DashBoard.doneCount = DashBoard.tasks.filter((task) => task.status === 'DONE').length;
+      DashBoard.save();
       newBoard.save().then((newAddBoard) => {
         res.send(newAddBoard);
+
       });
     } catch (error) {
       res.send(error)
@@ -44,8 +56,25 @@ class BoardsController {
   }
   async deleteBoard(req, res, next) {
     try {
-      Boards.findOneAndRemove({ _id: req.params.boardId, dashId: req.params.dashId }).then(
+
+      const { boardId, dashId } = req.params;
+
+      const board = await DashBoards.findById(dashId);
+
+      const filteredTasks = board.tasks.filter((task) => task._id !== boardId);
+
+      board.tasks = filteredTasks;
+
+      board.toDoCount = board.tasks.filter((task) => task.status === 'TODO').length;
+      board.inProgressCount = board.tasks.filter(
+        (task) => task.status === 'INPROGRESS',
+      ).length;
+      board.doneCount = board.tasks.filter((task) => task.status === 'DONE').length;
+
+      board.save();
+      Boards.findOneAndRemove({ _id: boardId, dashId }).then(
         (removeBoards) => {
+
           res.send(removeBoards);
         },
       );

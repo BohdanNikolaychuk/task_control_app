@@ -1,28 +1,41 @@
 const mongoose = require('mongoose');
 
-
 const DashBoardsSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     minlength: 2,
-    trim: true
+    trim: true,
   },
   desc: {
     type: String,
     required: true,
     minlength: 2,
-    trim: true
+    trim: true,
   },
   createdAt: {
     type: Date,
-    default: Date.now()
+    default: Date.now(),
   },
   userId: { type: String, required: true },
-
-})
-
+  tasks: {
+    type: Array,
+    default: [],
+  },
+  toDoCount: {
+    type: Number,
+    default: 0,
+  },
+  inProgressCount: {
+    type: Number,
+    default: 0,
+  },
+  doneCount: {
+    type: Number,
+    default: 0
+  }
+});
 
 const DashBoards = mongoose.model('DashBoards', DashBoardsSchema);
 
-module.exports = { DashBoards }
+module.exports = { DashBoards };

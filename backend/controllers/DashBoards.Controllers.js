@@ -1,8 +1,12 @@
 
 const { DashBoards } = require('../models/Dashboards.Model');
 const { Boards } = require('../models/Boards.Model');
+
+
 class DashBoardsController {
-  async getDashBoards(req, res, next) {
+
+
+  async getDashBoards(req, res) {
     try {
       DashBoards.find({ userId: req.user.userId }).then((dashboards) => {
         res.send(dashboards);
@@ -12,17 +16,17 @@ class DashBoardsController {
     }
   }
 
-  async createNewDashBoard(req, res, next) {
+  async createNewDashBoard(req, res) {
     try {
-      let { name, desc } = req.body;
-      let newDashBoard = new DashBoards({
+      const { name, desc } = req.body;
+
+      const newDashBoard = new DashBoards({
         name,
         desc,
         userId: req.user.userId,
       });
-      newDashBoard.save().then((dashboards) => {
-
-        res.send(dashboards);
+      newDashBoard.save().then(() => {
+        res.send(newDashBoard);
       });
     } catch (error) {
       res.send(error)
@@ -39,7 +43,6 @@ class DashBoardsController {
   }
   async deleteDashBoard(req, res, next) {
     try {
-
       DashBoards.findByIdAndDelete({ _id: req.params.id }).then((removeDashBoard) => {
         res.send(removeDashBoard);
         Boards.find({ dashId: req.params.id }).remove().exec();
