@@ -47,12 +47,10 @@
       </div>
     </form>
   </app-modal>
-
+  <button class="add__dashboard sub__title" (click)="toggleModal()">
+    add new dashboard
+  </button>
   <div class="dashboards">
-    <button class="add__dashboard sub__title" (click)="toggleModal()">
-      add new dashboard
-    </button>
-
     <div
       class="dashboard"
       *ngFor="
@@ -74,6 +72,9 @@
         <p class="dashboard__info-text">
           {{ dashboard.createdAt | date: "MM/dd/yyyy hh:mm:ss" }}
         </p>
+        <p>done:{{ dashboard.doneCount }}</p>
+        <p>toDo:{{ dashboard.toDoCount }}</p>
+        <p>inProgress:{{ dashboard.inProgressCount }}</p>
 
         <app-button
           (click)="deleteDashBoard(dashboard._id, i)"

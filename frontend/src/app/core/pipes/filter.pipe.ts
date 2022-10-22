@@ -14,7 +14,6 @@ export class FilterPipe implements PipeTransform {
       if (value.length === 0 || filterString === '' || propName === '') {
         return value;
       }
-
       for (const item of value) {
         if (item[propName] === filterString) {
           resultArray.push(item);

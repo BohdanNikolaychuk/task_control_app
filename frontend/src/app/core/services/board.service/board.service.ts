@@ -27,7 +27,6 @@ export class BoardService {
       }
     );
   }
-
   createBoard(dashId: string, name: Object, status: string) {
     return this.http.post(`${this.MAIN_URL}dashboards/${dashId}/boards`, {
       name,

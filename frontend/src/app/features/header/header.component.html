@@ -1,4 +1,8 @@
 <header class="header">
-  <button [routerLink]="['/login']">Login</button>
-  <button [routerLink]="['/register']">Register</button>
+  <div class="buttons">
+    <button class="button__cancel" [routerLink]="['/login']">Login</button>
+    <button class="button__create" [routerLink]="['/register']">
+      Register
+    </button>
+  </div>
 </header>

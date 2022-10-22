@@ -10,6 +10,7 @@ import { BoardComponent } from './pages/board/board.component';
 import { PathNotFoundComponent } from './pages/path-not-found/path-not-found.component';
 import { HeaderComponent } from './features/header/header.component';
 import { ButtonModule } from './shared/button/button.module';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ModalComponent } from './shared/modal/modal.component';
 import { InputComponent } from './shared/input/input.component';
@@ -40,6 +41,7 @@ import { SortPipe } from './core/pipes/sort.pipe/sort.pipe';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    DragDropModule,
   ],
   providers: [
     {

@@ -22,15 +22,15 @@
     </div>
   </app-modal>
   <app-button [routerLink]="['/']" name="back"></app-button>
-  <div class="kanban__board">
+  <div class="kanban__board" cdkDropListGroup>
     <div class="kanban__block">
       <h3 class="title">To Do</h3>
       <div class="add__button" (click)="toggleModal('TODO')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board">
+      <div class="board" cdkDropList>
         <ng-container *ngFor="let board of boards; let i = index">
-          <div class="task" draggable="true" *ngIf="board.status === 'TODO'">
+          <div class="task" cdkDrag *ngIf="board.status === 'TODO'">
             <input
               #inputName
               class="board__info-title"
@@ -49,13 +49,9 @@
       <div class="add__button" (click)="toggleModal('INPROGRESS')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board">
+      <div class="board" cdkDropList>
         <ng-container *ngFor="let board of boards; let i = index">
-          <div
-            draggable="true"
-            class="task"
-            *ngIf="board.status === 'INPROGRESS'"
-          >
+          <div cdkDrag class="task" *ngIf="board.status === 'INPROGRESS'">
             <input
               #inputName
               class="board__info-title"
@@ -79,8 +75,8 @@
       <div class="add__button" (click)="toggleModal('DONE')">
         <span class="sub__title">add new task</span>
       </div>
-      <ng-container *ngFor="let board of boards; let i = index">
-        <div class="board">
+      <div class="board" cdkDropList>
+        <ng-container *ngFor="let board of boards; let i = index">
           <div draggable="true" class="task" *ngIf="board.status === 'DONE'">
             <input
               #inputName
@@ -92,8 +88,8 @@
               Edit
             </button>
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>
