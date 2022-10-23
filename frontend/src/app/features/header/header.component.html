@@ -1,8 +1,26 @@
 <header class="header">
   <div class="buttons">
-    <button class="button__cancel" [routerLink]="['/login']">Login</button>
-    <button class="button__create" [routerLink]="['/register']">
+    <button
+      *ngIf="!loginStatus"
+      class="button__cancel"
+      [routerLink]="['/login']"
+    >
+      Login
+    </button>
+    <button
+      *ngIf="!loginStatus"
+      class="button__create"
+      [routerLink]="['/register']"
+    >
       Register
+    </button>
+    <button
+      *ngIf="loginStatus"
+      class="button__cancel"
+      (click)="authService.logOut()"
+      [routerLink]="['/login']"
+    >
+      Log Out
     </button>
   </div>
 </header>

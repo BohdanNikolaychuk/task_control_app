@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './../../core/services/auth.service/auth.service';
 
 @Component({
@@ -7,15 +7,17 @@ import { AuthService } from './../../core/services/auth.service/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  loginStatus;
 
-  isAuthUser = null;
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
-    this.isAuthUser = this.authService.isAuth();
+    this.authService.isLoggedIn.subscribe((status) => {
+      this.loginStatus = status;
+    });
   }
 
-  logOut() {
-    this.authService.logOut();
+  ngOnDestroy(): void {
+    this.authService.isLoggedIn.unsubscribe();
   }
 }

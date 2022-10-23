@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +14,8 @@ export class AuthService {
 
   public MAIN_URL!: string;
 
+  isLoggedIn = new BehaviorSubject(false);
+
   constructor(private http: HttpClient) {
     this.MAIN_URL = environment.MIAN_URL;
   }
@@ -23,6 +25,7 @@ export class AuthService {
   }
 
   login(FormData: ILogin): Observable<{ jwt_token: string }> {
+    this.isLoggedIn.next(true);
     return this.http.post(`${this.MAIN_URL}login`, FormData).pipe(
       tap(({ jwt_token }: any) => {
         localStorage.setItem('SeesionUser', jwt_token);
@@ -32,7 +35,8 @@ export class AuthService {
   }
 
   logOut() {
-    localStorage.clear();
+    this.isLoggedIn.next(false);
+    localStorage.removeItem('SeesionUser');
   }
 
   setToken(jwt_token: string) {
