@@ -2,22 +2,24 @@
   <div class="info">
     <h3 class="title">dashboard</h3>
     <div class="filter">
-      <input
-        [(ngModel)]="SearchValue"
-        type="text"
-        class="input__modal"
-        placeholder="Filter..."
-      />
+      <div class="search__filter">
+        <input
+          [(ngModel)]="SearchValue"
+          type="text"
+          class="input__search"
+          placeholder="Filter..."
+        />
 
-      <select [(ngModel)]="SortByParam">
-        <option value="name">By name</option>
-        <option value="desc">By description</option>
-      </select>
+        <select [(ngModel)]="SortByParam">
+          <option value="name">By name</option>
+          <option value="desc">By description</option>
+        </select>
 
-      <button class="button__cancel" (click)="onSortDirection()">
-        <span *ngIf="SortDirection === 'asc'">Sorting by ASC</span>
-        <span *ngIf="SortDirection === 'desc'">Sorting by DESC</span>
-      </button>
+        <button class="button__cancel" (click)="onSortDirection()">
+          <span *ngIf="SortDirection === 'asc'">Sorting by ASC</span>
+          <span *ngIf="SortDirection === 'desc'">Sorting by DESC</span>
+        </button>
+      </div>
     </div>
   </div>
   <app-modal [show]="showModal" [customClass]="'custom_modal_class'">

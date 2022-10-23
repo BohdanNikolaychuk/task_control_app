@@ -11,9 +11,7 @@ import { ILogin, IRegister } from './../../interface/IUser';
 })
 export class AuthService {
   private token!: string;
-
   public MAIN_URL!: string;
-
   isLoggedIn = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {
@@ -25,17 +23,17 @@ export class AuthService {
   }
 
   login(FormData: ILogin): Observable<{ jwt_token: string }> {
-    this.isLoggedIn.next(true);
     return this.http.post(`${this.MAIN_URL}login`, FormData).pipe(
       tap(({ jwt_token }: any) => {
         localStorage.setItem('SeesionUser', jwt_token);
         this.setToken(jwt_token);
+        this.isLoggedIn.next(this.isAuth());
       })
     );
   }
 
   logOut() {
-    this.isLoggedIn.next(false);
+    this.isLoggedIn.next(this.isAuth());
     localStorage.removeItem('SeesionUser');
   }
 

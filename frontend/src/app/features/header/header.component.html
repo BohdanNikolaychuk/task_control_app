@@ -17,7 +17,7 @@
     <button
       *ngIf="loginStatus"
       class="button__cancel"
-      (click)="authService.logOut()"
+      (click)="logOut()"
       [routerLink]="['/login']"
     >
       Log Out
