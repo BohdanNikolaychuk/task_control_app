@@ -159,6 +159,19 @@ html {
   color: #6a6dcd;
 }
 
+.button__cancel:hover {
+  background-color: #6a6dcd;
+  border-radius: 16px;
+  text-align: center;
+  align-items: center;
+  border: 1px solid #6a6dcd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 15px 30px;
+  cursor: pointer;
+  color: #fff;
+}
+
 .button__create {
   background-color: #6a6dcd;
   border-radius: 16px;
@@ -170,6 +183,19 @@ html {
   padding: 15px 30px;
   cursor: pointer;
   color: #fff;
+}
+
+.button__create:hover {
+  background-color: inherit;
+  border-radius: 16px;
+  text-align: center;
+  align-items: center;
+  border: 1px solid #6a6dcd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 15px 30px;
+  cursor: pointer;
+  color: #6a6dcd;
 }
 
 .button__create:disabled {

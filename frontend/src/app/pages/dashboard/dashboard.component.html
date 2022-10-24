@@ -57,7 +57,7 @@
       class="dashboard"
       *ngFor="
         let dashboard of dashboards
-          | filter: SearchValue:'name'
+          | filter: SearchValue:SortByParam
           | sort: [SortByParam, SortDirection];
         let i = index;
         trackBy: trackByFn
@@ -71,13 +71,14 @@
           value="{{ dashboard.name }}"
         />
         <p class="dashboard__info-text">{{ dashboard.desc }}</p>
-        <p class="dashboard__info-text">
-          {{ dashboard.createdAt | date: "MM/dd/yyyy hh:mm:ss" }}
+        <p class="dashboard__info-date">
+          {{ dashboard.createdAt | date: " MM/dd/yyyy" }} at
+          {{ dashboard.createdAt | date: " hh:mm:ss" }}
         </p>
+
         <p>done:{{ dashboard.doneCount }}</p>
         <p>toDo:{{ dashboard.toDoCount }}</p>
         <p>inProgress:{{ dashboard.inProgressCount }}</p>
-
         <app-button
           (click)="deleteDashBoard(dashboard._id, i)"
           name="delete"

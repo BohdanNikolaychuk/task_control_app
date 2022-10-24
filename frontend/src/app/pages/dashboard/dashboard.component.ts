@@ -1,11 +1,11 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { IDashBoardForm } from 'src/app/core/interface/IForm';
 import { DashboardService } from './../../core/services/dashboard.service/dashboard.service';
 
 import { IDashBoard } from './../../core/interface/IDashBoard';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +13,8 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  @Output() countUpdate = new EventEmitter<string>();
+
   dashboards: IDashBoard[] = [];
   //serach
   showModal = false;

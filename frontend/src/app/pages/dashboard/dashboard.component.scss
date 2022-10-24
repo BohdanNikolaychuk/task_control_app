@@ -17,6 +17,15 @@
   cursor: pointer;
 }
 
+.add__dashboard:hover {
+  margin: 20px;
+  background: #26262627;
+  border-radius: 16px;
+  color: #ffffff;
+  padding: 30px;
+  cursor: pointer;
+}
+
 .dashboards {
   display: flex;
   flex-wrap: wrap;
@@ -36,21 +45,28 @@
 
   .dashboard {
     margin: 20px;
-    background: #262626;
-    border-radius: 16px;
+    position: relative;
+
     color: #ffffff;
-    padding: 30px;
+    padding: 10px;
     cursor: pointer;
+
+    background: none;
     &__info {
       padding: 20px;
       text-align: center;
       align-items: center;
+      background: #262626;
+      border-radius: 16px;
       &-title {
         font-size: 36px;
         padding-bottom: 10px;
       }
       &-text {
-        font-size: 29px;
+        font-size: 30px;
+      }
+      &-date {
+        font-size: 25px;
       }
     }
   }
