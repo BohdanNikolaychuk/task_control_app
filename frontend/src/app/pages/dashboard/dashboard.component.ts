@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
     this.form.reset();
   }
 
-  deleteDashBoard(id: string, i: number) {
+  deleteDashBoard(id: string) {
     this.dashboardService.deleteDashBoard(id);
   }
   editDashBoards(id: string, name: string) {

@@ -63,10 +63,10 @@ export class DashboardService {
     return this.http
       .delete(`${environment.MIAN_URL}dashboards/${id}`)
       .subscribe(() => {
-        let boardTemp = this.getDashBoardsValue();
-        const delIndex = boardTemp.findIndex((board) => board._id === id);
-        boardTemp.splice(delIndex, 1);
-        this.setDashBoards(boardTemp);
+        let filteredDash = this.getDashBoardsValue().filter(
+          (board) => board._id !== id
+        );
+        this.setDashBoards(filteredDash);
       });
   }
 
