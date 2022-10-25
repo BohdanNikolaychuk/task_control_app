@@ -14,12 +14,13 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ModalComponent } from './shared/modal/modal.component';
 import { InputComponent } from './shared/input/input.component';
-import { FilterPipe } from './core/pipes/filter.pipe';
+
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { SortPipe } from './core/pipes/sort.pipe/sort.pipe';
+import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,10 +30,10 @@ import { SortPipe } from './core/pipes/sort.pipe/sort.pipe';
     HeaderComponent,
     ModalComponent,
     InputComponent,
-    FilterPipe,
     LoginComponent,
     RegisterComponent,
     SortPipe,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

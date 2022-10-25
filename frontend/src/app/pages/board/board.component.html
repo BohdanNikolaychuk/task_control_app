@@ -87,6 +87,9 @@
             <button (click)="editBoard(board._id, inputName.value)">
               Edit
             </button>
+            <button (click)="changeArchiveStatus(board._id, board.archive)">
+              Archive
+            </button>
           </div>
         </ng-container>
       </div>

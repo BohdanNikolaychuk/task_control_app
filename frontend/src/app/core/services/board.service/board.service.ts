@@ -33,4 +33,12 @@ export class BoardService {
       status,
     });
   }
+  changeArchiveStatus(dashId: string, boardId: string, archive: boolean) {
+    return this.http.patch(
+      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`,
+      {
+        archive,
+      }
+    );
+  }
 }

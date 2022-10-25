@@ -49,6 +49,14 @@ export class BoardComponent implements OnInit {
       });
   }
 
+  changeArchiveStatus(boardId: string, archive: boolean) {
+    this.boardService
+      .changeArchiveStatus(this.selectedID, boardId, archive)
+      .subscribe((editBoard) => {
+        console.log(editBoard);
+      });
+  }
+
   deleteBoard(boardId: string, index: number) {
     this.boardService
       .deleteBoard(this.selectedID, boardId)
