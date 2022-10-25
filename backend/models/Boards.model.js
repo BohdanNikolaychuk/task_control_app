@@ -16,7 +16,12 @@ const BoardSchema = new mongoose.Schema({
     default: "TODO",
     enum: ['TODO', "INPROGRESS", 'DONE'],
     required: true,
+  },
+  archive: {
+    type: Boolean,
+    default: false,
   }
+
 
 })
 

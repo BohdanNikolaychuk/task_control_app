@@ -33,7 +33,7 @@ const DashBoardsSchema = new mongoose.Schema({
   doneCount: {
     type: Number,
     default: 0
-  }
+  },
 });
 
 const DashBoards = mongoose.model('DashBoards', DashBoardsSchema);

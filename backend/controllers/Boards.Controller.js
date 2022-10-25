@@ -36,7 +36,6 @@ class BoardsController {
       DashBoard.save();
       newBoard.save().then((newAddBoard) => {
         res.send(newAddBoard);
-
       });
     } catch (error) {
       res.send(error)
@@ -56,28 +55,38 @@ class BoardsController {
   }
   async deleteBoard(req, res, next) {
     try {
-
       const { boardId, dashId } = req.params;
+      const DashBoard = await DashBoards.findById(dashId);
+      // 
+      const filteredTasks = DashBoard.tasks.filter((task) => {
+        JSON.stringify(task._id) !== boardId
+      });
 
-      const board = await DashBoards.findById(dashId);
-
-      const filteredTasks = board.tasks.filter((task) => task._id !== boardId);
-
-      board.tasks = filteredTasks;
-
-      board.toDoCount = board.tasks.filter((task) => task.status === 'TODO').length;
-      board.inProgressCount = board.tasks.filter(
+      DashBoard.tasks = filteredTasks;
+      DashBoard.toDoCount = DashBoard.tasks.filter((task) => task.status === 'TODO').length;
+      DashBoard.inProgressCount = DashBoard.tasks.filter(
         (task) => task.status === 'INPROGRESS',
       ).length;
-      board.doneCount = board.tasks.filter((task) => task.status === 'DONE').length;
+      DashBoard.doneCount = DashBoard.tasks.filter((task) => task.status === 'DONE').length;
 
-      board.save();
+      DashBoard.save();
       Boards.findOneAndRemove({ _id: boardId, dashId }).then(
         (removeBoards) => {
 
           res.send(removeBoards);
         },
       );
+    } catch (error) {
+      res.send(error)
+    }
+  }
+
+  async changeArchiveStatus(req, res, next) {
+    try {
+      await Boards.findOneAndUpdate(
+        { _id: req.params.boardId, dashId: req.params.dashId },
+        { archive: !archive },
+      )
     } catch (error) {
       res.send(error)
     }
