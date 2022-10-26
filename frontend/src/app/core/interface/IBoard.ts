@@ -4,4 +4,5 @@ export interface IBoard {
   status: string;
   __v: number;
   _id: string;
+  archive: boolean;
 }

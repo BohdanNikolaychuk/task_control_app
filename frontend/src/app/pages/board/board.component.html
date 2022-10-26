@@ -29,15 +29,20 @@
         <span class="sub__title">add new task</span>
       </div>
       <div class="board" cdkDropList>
-        <ng-container *ngFor="let board of boards; let i = index">
+        <ng-container *ngFor="let board of todo; let i = index">
           <div class="task" cdkDrag *ngIf="board.status === 'TODO'">
             <input
               #inputName
               class="board__info-title"
               value="{{ board.name }}"
             />
-            <button (click)="deleteBoard(board._id, i)">Delete</button>
-            <button (click)="editBoard(board._id, inputName.value)">
+            <button class="button__nav" (click)="deleteBoard(board._id, i)">
+              Delete
+            </button>
+            <button
+              class="button__nav"
+              (click)="editBoard(board._id, inputName.value)"
+            >
               Edit
             </button>
           </div>
@@ -50,18 +55,18 @@
         <span class="sub__title">add new task</span>
       </div>
       <div class="board" cdkDropList>
-        <ng-container *ngFor="let board of boards; let i = index">
+        <ng-container *ngFor="let board of progress; let i = index">
           <div cdkDrag class="task" *ngIf="board.status === 'INPROGRESS'">
             <input
               #inputName
               class="board__info-title"
               value="{{ board.name }}"
             />
-            <button class="button" (click)="deleteBoard(board._id, i)">
+            <button class="button__nav" (click)="deleteBoard(board._id, i)">
               Delete
             </button>
             <button
-              class="button"
+              class="button__nav"
               (click)="editBoard(board._id, inputName.value)"
             >
               Edit
@@ -76,18 +81,31 @@
         <span class="sub__title">add new task</span>
       </div>
       <div class="board" cdkDropList>
-        <ng-container *ngFor="let board of boards; let i = index">
-          <div draggable="true" class="task" *ngIf="board.status === 'DONE'">
+        <ng-container *ngFor="let board of done; let i = index">
+          <div
+            [ngClass]="{ message: board.archive === true }"
+            cdkDrag
+            class="task"
+            *ngIf="board.status === 'DONE'"
+          >
             <input
               #inputName
               class="board__info-title"
               value="{{ board.name }}"
             />
-            <button (click)="deleteBoard(board._id, i)">Delete</button>
-            <button (click)="editBoard(board._id, inputName.value)">
+            <button class="button__nav" (click)="deleteBoard(board._id, i)">
+              Delete
+            </button>
+            <button
+              class="button__nav"
+              (click)="editBoard(board._id, inputName.value)"
+            >
               Edit
             </button>
-            <button (click)="changeArchiveStatus(board._id, board.archive)">
+            <button
+              class="button__nav"
+              (click)="changeArchiveStatus(board._id, board.archive)"
+            >
               Archive
             </button>
           </div>

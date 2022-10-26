@@ -39,8 +39,6 @@ export class DashboardService {
       this.http
         .get<IDashBoard[]>(`${environment.MIAN_URL}dashboards`)
         .subscribe((dashBoards: IDashBoard[]) => {
-          console.log(dashBoards);
-
           this.setDashBoards(dashBoards);
           this.dashBoardsGeted = true;
         });

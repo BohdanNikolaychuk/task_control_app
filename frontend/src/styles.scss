@@ -172,6 +172,19 @@ html {
   color: #fff;
 }
 
+.button__nav {
+  background-color: #262626;
+
+  text-align: center;
+  align-items: center;
+  border: 1px solid #6a6dcd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12), 0px 16px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #fff;
+}
+
 .button__create {
   background-color: #6a6dcd;
   border-radius: 16px;
