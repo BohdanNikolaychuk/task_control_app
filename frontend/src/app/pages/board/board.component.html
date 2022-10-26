@@ -23,65 +23,69 @@
   </app-modal>
   <app-button [routerLink]="['/']" name="back"></app-button>
   <div class="kanban__board" cdkDropListGroup>
-    <div class="kanban__block">
+    <div class="kanban__block" cdkDropList (cdkDropListDropped)="drop($event)">
       <h3 class="title">To Do</h3>
       <div class="add__button" (click)="toggleModal('TODO')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board" cdkDropList>
-        <ng-container *ngFor="let board of todo; let i = index">
+      <div class="board">
+        <ng-container *ngFor="let board of boards; let i = index">
           <div class="task" cdkDrag *ngIf="board.status === 'TODO'">
             <input
               #inputName
               class="board__info-title"
               value="{{ board.name }}"
             />
-            <button class="button__nav" (click)="deleteBoard(board._id, i)">
-              Delete
-            </button>
             <button
               class="button__nav"
               (click)="editBoard(board._id, inputName.value)"
             >
               Edit
             </button>
+            <div>
+              <button class="button__nav" (click)="deleteBoard(board._id, i)">
+                Delete
+              </button>
+            </div>
           </div>
         </ng-container>
       </div>
     </div>
-    <div class="kanban__block">
+    <div class="kanban__block" cdkDropList (cdkDropListDropped)="drop($event)">
       <h3 class="title">In Progress</h3>
       <div class="add__button" (click)="toggleModal('INPROGRESS')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board" cdkDropList>
-        <ng-container *ngFor="let board of progress; let i = index">
+      <div class="board">
+        <ng-container *ngFor="let board of boards; let i = index">
           <div cdkDrag class="task" *ngIf="board.status === 'INPROGRESS'">
             <input
               #inputName
               class="board__info-title"
               value="{{ board.name }}"
             />
-            <button class="button__nav" (click)="deleteBoard(board._id, i)">
-              Delete
-            </button>
             <button
               class="button__nav"
               (click)="editBoard(board._id, inputName.value)"
             >
               Edit
             </button>
+            <div>
+              <button class="button__nav" (click)="deleteBoard(board._id, i)">
+                Delete
+              </button>
+            </div>
           </div>
         </ng-container>
       </div>
     </div>
-    <div class="kanban__block">
+    <div class="kanban__block" cdkDropList (cdkDropListDropped)="drop($event)">
       <h3 class="title">Done</h3>
       <div class="add__button" (click)="toggleModal('DONE')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board" cdkDropList>
-        <ng-container *ngFor="let board of done; let i = index">
+      <div class="board">
+        <ng-container *ngFor="let board of boards; let i = index">
           <div
             [ngClass]="{ message: board.archive === true }"
             cdkDrag
@@ -93,21 +97,25 @@
               class="board__info-title"
               value="{{ board.name }}"
             />
-            <button class="button__nav" (click)="deleteBoard(board._id, i)">
-              Delete
-            </button>
+
             <button
               class="button__nav"
               (click)="editBoard(board._id, inputName.value)"
             >
               Edit
             </button>
-            <button
-              class="button__nav"
-              (click)="changeArchiveStatus(board._id, board.archive)"
-            >
-              Archive
-            </button>
+            <div>
+              <button class="button__nav" (click)="deleteBoard(board._id, i)">
+                Delete
+              </button>
+
+              <button
+                class="button__nav"
+                (click)="changeArchiveStatus(board._id, board.archive)"
+              >
+                Archive
+              </button>
+            </div>
           </div>
         </ng-container>
       </div>

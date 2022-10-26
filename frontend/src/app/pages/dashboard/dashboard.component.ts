@@ -38,10 +38,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  toggleModal = () => {
-    this.showModal = !this.showModal;
-  };
-
   getDashBoards() {
     this.dashBoardsSub = this.dashboardService
       .getDashBoardsObs()
@@ -76,4 +72,8 @@ export class DashboardComponent implements OnInit {
       this.SortDirection = 'desc';
     }
   }
+
+  toggleModal = () => {
+    this.showModal = !this.showModal;
+  };
 }

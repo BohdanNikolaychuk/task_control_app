@@ -11,12 +11,9 @@ export class BoardService {
   private BoardsGeted = false;
   private Boards = new BehaviorSubject<IBoard[]>([]);
 
-  public MAIN_URL!: string;
-  constructor(private http: HttpClient) {
-    this.MAIN_URL = environment.MIAN_URL;
-  }
+  constructor(private http: HttpClient) {}
 
-  getDashBoardsObs(): Observable<IBoard[]> {
+  getBoardsObs(): Observable<IBoard[]> {
     return this.Boards;
   }
 
@@ -28,47 +25,67 @@ export class BoardService {
     this.Boards.next(dashBoards);
   }
 
-  clearDashBoardsRequestState() {
-    this.BoardsGeted = false;
-  }
-
   getBoard(dashId: string) {
     if (!this.BoardsGeted) {
       this.http
-        .get(`${this.MAIN_URL}dashboards/${dashId}/boards`)
+        .get(`${environment.MIAN_URL}dashboards/${dashId}/boards`)
         .subscribe((dashBoards: IBoard[]) => {
-          console.log(dashBoards);
-
           this.setBoards(dashBoards);
           this.BoardsGeted = true;
         });
     }
   }
-  deleteBoard(dashId: string, boardId: string) {
-    return this.http.delete(
-      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`
-    );
+
+  createBoard(dashId: string, name: Object, status: string) {
+    this.http
+      .post(`${environment.MIAN_URL}dashboards/${dashId}/boards`, {
+        name,
+        status,
+      })
+      .subscribe((newBoard: IBoard) => {
+        const newBoards = [...this.getBoardsValue(), newBoard];
+        this.setBoards(newBoards);
+      });
   }
+
+  deleteBoard(dashId: string, boardId: string) {
+    this.http
+      .delete(`${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`)
+      .subscribe(() => {
+        let filteredDash = this.getBoardsValue().filter(
+          (board) => board._id !== boardId
+        );
+        this.setBoards(filteredDash);
+      });
+  }
+
   editBoard(dashId: string, boardId: string, name: string) {
-    return this.http.patch(
-      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`,
+    let boardsTemp = this.getBoardsValue().map((board) => {
+      return board._id === boardId ? { ...board, name } : board;
+    });
+    this.setBoards(boardsTemp);
+
+    this.http.patch(
+      `${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`,
       {
         name,
-      }
+      },
+      { responseType: 'text' }
     );
   }
-  createBoard(dashId: string, name: Object, status: string) {
-    return this.http.post(`${this.MAIN_URL}dashboards/${dashId}/boards`, {
-      name,
-      status,
-    });
-  }
+
   changeArchiveStatus(dashId: string, boardId: string, archive: boolean) {
-    return this.http.patch(
-      `${this.MAIN_URL}dashboards/${dashId}/boards/${boardId}`,
+    let boardsTemp = this.getBoardsValue().map((board) => {
+      return board._id === boardId ? { ...board, archive } : board;
+    });
+    this.setBoards(boardsTemp);
+
+    this.http.patch(
+      `${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`,
       {
-        archive,
-      }
+        archive: archive,
+      },
+      { responseType: 'text' }
     );
   }
 }

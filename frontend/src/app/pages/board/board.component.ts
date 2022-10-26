@@ -1,4 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,10 +18,10 @@ import { BoardService } from 'src/app/core/services/board.service/board.service'
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  boards!: any[];
-  todo: any[] = [];
-  progress: any[] = [];
-  done: any[] = [];
+  boards: IBoard[] = [];
+  todo: IBoard[] = [];
+  progress: IBoard[] = [];
+  done: IBoard[] = [];
   selectedID!: string;
   form!: FormGroup;
   showModal = false;
@@ -37,88 +42,62 @@ export class BoardComponent implements OnInit {
 
     this.route.params.subscribe((params: Params) => {
       this.selectedID = params['dashId'];
-      this.boardService.getBoard(this.selectedID);
-      this.getBoards();
     });
+    this.getBoards();
+    this.boardService.getBoard(this.selectedID);
   }
 
   getBoards() {
     this.dashBoardsSub = this.boardService
-      .getDashBoardsObs()
-      .subscribe((boards: any) => {
-        boards.forEach((board) => {
-          switch (board.status) {
-            case 'TODO':
-              this.todo.push(board);
-              break;
-            case 'INPROGRESS':
-              this.progress.push(board);
-              break;
-            case 'DONE':
-              this.done.push(board);
-              break;
-          }
-        });
+      .getBoardsObs()
+      .subscribe((boards: IBoard[]) => {
+        this.boards = boards;
       });
+  }
+
+  editBoard(boardId: string, name: string) {
+    this.boardService.editBoard(this.selectedID, boardId, name);
+  }
+
+  changeArchiveStatus(boardId: string, archive: boolean) {
+    this.boardService.changeArchiveStatus(this.selectedID, boardId, !archive);
+  }
+
+  deleteBoard(boardId: string, index: number) {
+    this.boardService.deleteBoard(this.selectedID, boardId);
+  }
+
+  createBoard(formData: IBoardForm) {
+    this.boardService.createBoard(
+      this.selectedID,
+      formData.name,
+      this.selectedStatus
+    );
+
+    this.showModal = false;
+    this.form.reset();
+    this.selectedStatus = '';
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 
   toggleModal = (status: string) => {
     this.showModal = !this.showModal;
     this.selectedStatus = status;
   };
-
-  editBoard(boardId: string, name: string) {
-    this.boardService
-      .editBoard(this.selectedID, boardId, name)
-      .subscribe((editBoard) => {
-        console.log(editBoard);
-      });
-  }
-
-  changeArchiveStatus(boardId: string, archive: boolean) {
-    archive = !archive;
-    this.boardService
-      .changeArchiveStatus(this.selectedID, boardId, archive)
-      .subscribe((editBoard) => {});
-  }
-
-  deleteBoard(boardId: string, index: number) {
-    this.boardService
-      .deleteBoard(this.selectedID, boardId)
-      .subscribe((deleteBoard: IBoard) => {
-        switch (deleteBoard.status) {
-          case 'TODO':
-            this.todo.splice(index, 1);
-            break;
-          case 'INPROGRESS':
-            this.progress.splice(index, 1);
-            break;
-          case 'DONE':
-            this.done.splice(index, 1);
-            break;
-        }
-      });
-  }
-
-  createBoard(formData: IBoardForm) {
-    this.boardService
-      .createBoard(this.selectedID, formData.name, this.selectedStatus)
-      .subscribe((newBoard: IBoard) => {
-        switch (newBoard.status) {
-          case 'TODO':
-            this.todo.push(newBoard);
-            break;
-          case 'INPROGRESS':
-            this.progress.push(newBoard);
-            break;
-          case 'DONE':
-            this.done.push(newBoard);
-            break;
-        }
-
-        this.showModal = false;
-        this.form.reset();
-        this.selectedStatus = '';
-      });
-  }
 }

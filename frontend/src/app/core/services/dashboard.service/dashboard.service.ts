@@ -28,10 +28,6 @@ export class DashboardService {
     this.dashBoards.next(dashBoards);
   }
 
-  clearDashBoardsRequestState() {
-    this.dashBoardsGeted = false;
-  }
-
   // fetch data
 
   getDashBoards() {
@@ -58,7 +54,7 @@ export class DashboardService {
   }
   //  end create DashBoard
   deleteDashBoard(id: string) {
-    return this.http
+    this.http
       .delete(`${environment.MIAN_URL}dashboards/${id}`)
       .subscribe(() => {
         let filteredDash = this.getDashBoardsValue().filter(
@@ -69,17 +65,16 @@ export class DashboardService {
   }
 
   editDashBoard(id: string, name: string) {
-    return this.http
-      .patch(`${environment.MIAN_URL}dashboards/${id}`, { name })
-      .subscribe(() => {
-        let boardTemp = this.getDashBoardsValue().map((board) => {
-          if (board._id === id) {
-            return { ...board, name };
-          } else {
-            return board;
-          }
-        });
-        this.setDashBoards(boardTemp);
-      });
+    let boardsTemp = this.getDashBoardsValue().map((board) => {
+      return board._id === id ? { ...board, name } : board;
+    });
+    this.setDashBoards(boardsTemp);
+    this.http
+      .patch(
+        `${environment.MIAN_URL}dashboards/${id}`,
+        { name },
+        { responseType: 'text' }
+      )
+      .subscribe();
   }
 }
