@@ -21,19 +21,16 @@ export class BoardService {
     return this.Boards.getValue();
   }
 
-  setBoards(dashBoards: IBoard[]) {
-    this.Boards.next(dashBoards);
+  setBoards(Boards: IBoard[]) {
+    this.Boards.next(Boards);
   }
 
   getBoard(dashId: string) {
-    if (!this.BoardsGeted) {
-      this.http
-        .get(`${environment.MIAN_URL}dashboards/${dashId}/boards`)
-        .subscribe((dashBoards: IBoard[]) => {
-          this.setBoards(dashBoards);
-          this.BoardsGeted = true;
-        });
-    }
+    this.http
+      .get(`${environment.MIAN_URL}dashboards/${dashId}/boards`)
+      .subscribe((dashBoards: IBoard[]) => {
+        this.setBoards(dashBoards);
+      });
   }
 
   createBoard(dashId: string, name: Object, status: string) {
@@ -45,6 +42,7 @@ export class BoardService {
       .subscribe((newBoard: IBoard) => {
         const newBoards = [...this.getBoardsValue(), newBoard];
         this.setBoards(newBoards);
+        console.log(newBoards);
       });
   }
 
@@ -64,14 +62,17 @@ export class BoardService {
       return board._id === boardId ? { ...board, name } : board;
     });
     this.setBoards(boardsTemp);
+    console.log(boardsTemp);
 
-    this.http.patch(
-      `${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`,
-      {
-        name,
-      },
-      { responseType: 'text' }
-    );
+    this.http
+      .patch(
+        `${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`,
+        {
+          name,
+        },
+        { responseType: 'text' }
+      )
+      .subscribe();
   }
 
   changeArchiveStatus(dashId: string, boardId: string, archive: boolean) {
@@ -80,12 +81,14 @@ export class BoardService {
     });
     this.setBoards(boardsTemp);
 
-    this.http.patch(
-      `${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`,
-      {
-        archive: archive,
-      },
-      { responseType: 'text' }
-    );
+    this.http
+      .patch(
+        `${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`,
+        {
+          archive: archive,
+        },
+        { responseType: 'text' }
+      )
+      .subscribe();
   }
 }

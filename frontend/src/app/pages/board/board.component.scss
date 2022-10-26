@@ -45,4 +45,11 @@
 }
 .message {
   background-color: #262626;
+  border: 1px solid #6a6dcd;
+}
+.info {
+  display: flex;
+  padding-top: 20px;
+  align-items: center;
+  justify-content: space-between;
 }

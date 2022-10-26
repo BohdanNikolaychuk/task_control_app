@@ -70,7 +70,7 @@ class BoardsController {
       DashBoard.doneCount = DashBoard.tasks.filter((task) => task.status === 'DONE').length;
 
       DashBoard.save();
-      Boards.findOneAndRemove({ _id: boardId, dashId }).then(
+      await Boards.findOneAndRemove({ _id: boardId, dashId }).then(
         (removeBoards) => {
 
           res.send(removeBoards);
@@ -83,10 +83,12 @@ class BoardsController {
 
   async changeArchiveStatus(req, res, next) {
     try {
-      await Boards.findOneAndUpdate(
+      Boards.findOneAndUpdate(
         { _id: req.params.boardId, dashId: req.params.dashId },
-        { archive: !archive },
-      )
+        { $set: req.body },
+      ).then(() => {
+        res.sendStatus(200);
+      });
     } catch (error) {
       res.send(error)
     }

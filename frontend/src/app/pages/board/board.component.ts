@@ -3,7 +3,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -18,17 +18,23 @@ import { BoardService } from 'src/app/core/services/board.service/board.service'
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
+  showModal = false;
+  SearchValue = '';
+  SortByParam = 'name';
+  SortDirection = 'asc';
+
+  //__________
   boards: IBoard[] = [];
   todo: IBoard[] = [];
   progress: IBoard[] = [];
   done: IBoard[] = [];
   selectedID!: string;
   form!: FormGroup;
-  showModal = false;
+
   selectedStatus!: string;
   selectedArch: boolean;
 
-  dashBoardsSub!: Subscription;
+  BoardsSub!: Subscription;
 
   constructor(
     private boardService: BoardService,
@@ -48,23 +54,14 @@ export class BoardComponent implements OnInit {
   }
 
   getBoards() {
-    this.dashBoardsSub = this.boardService
+    this.BoardsSub = this.boardService
       .getBoardsObs()
       .subscribe((boards: IBoard[]) => {
         this.boards = boards;
+        this.todo = boards.filter((board) => board.status === 'TODO');
+        this.progress = boards.filter((board) => board.status === 'INPROGRESS');
+        this.done = boards.filter((board) => board.status === 'DONE');
       });
-  }
-
-  editBoard(boardId: string, name: string) {
-    this.boardService.editBoard(this.selectedID, boardId, name);
-  }
-
-  changeArchiveStatus(boardId: string, archive: boolean) {
-    this.boardService.changeArchiveStatus(this.selectedID, boardId, !archive);
-  }
-
-  deleteBoard(boardId: string, index: number) {
-    this.boardService.deleteBoard(this.selectedID, boardId);
   }
 
   createBoard(formData: IBoardForm) {
@@ -79,25 +76,38 @@ export class BoardComponent implements OnInit {
     this.selectedStatus = '';
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
+  editBoard(boardId: string, name: string) {
+    this.boardService.editBoard(this.selectedID, boardId, name);
+  }
+
+  changeArchiveStatus(boardId: string, archive: boolean) {
+    this.boardService.changeArchiveStatus(this.selectedID, boardId, !archive);
+  }
+
+  deleteBoard(boardId: string, index: number) {
+    this.boardService.deleteBoard(this.selectedID, boardId);
+  }
+
+  drop(event: CdkDragDrop<IBoard[]>) {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
   toggleModal = (status: string) => {
     this.showModal = !this.showModal;
     this.selectedStatus = status;
+    this.form.reset();
   };
+
+  onSortDirection() {
+    if (this.SortDirection === 'desc') {
+      this.SortDirection = 'asc';
+    } else {
+      this.SortDirection = 'desc';
+    }
+  }
 }

@@ -76,9 +76,6 @@
           {{ dashboard.createdAt | date: " hh:mm:ss" }}
         </p>
 
-        <p>done:{{ dashboard.doneCount }}</p>
-        <p>toDo:{{ dashboard.toDoCount }}</p>
-        <p>inProgress:{{ dashboard.inProgressCount }}</p>
         <app-button
           (click)="deleteDashBoard(dashboard._id)"
           name="delete"

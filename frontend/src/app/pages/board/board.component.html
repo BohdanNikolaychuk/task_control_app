@@ -1,5 +1,26 @@
 <div class="container">
-  <h3 class="title">boards</h3>
+  <div class="info">
+    <h3 class="title">boards</h3>
+    <div class="filter">
+      <div class="search__filter">
+        <input
+          [(ngModel)]="SearchValue"
+          type="text"
+          class="input__search"
+          placeholder="Filter..."
+        />
+
+        <select [(ngModel)]="SortByParam">
+          <option value="name">By name</option>
+        </select>
+
+        <button class="button__cancel" (click)="onSortDirection()">
+          <span *ngIf="SortDirection === 'asc'">Sorting by ASC</span>
+          <span *ngIf="SortDirection === 'desc'">Sorting by DESC</span>
+        </button>
+      </div>
+    </div>
+  </div>
   <app-modal [show]="showModal" [customClass]="'custom_modal_class'">
     <div class="new__dash">
       <h1 class="title">Create a new task in board</h1>
@@ -23,13 +44,20 @@
   </app-modal>
   <app-button [routerLink]="['/']" name="back"></app-button>
   <div class="kanban__board" cdkDropListGroup>
-    <div class="kanban__block" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="kanban__block">
       <h3 class="title">To Do</h3>
       <div class="add__button" (click)="toggleModal('TODO')">
         <span class="sub__title">add new task</span>
       </div>
       <div class="board">
-        <ng-container *ngFor="let board of boards; let i = index">
+        <ng-container
+          *ngFor="
+            let board of todo
+              | filter: SearchValue:SortByParam
+              | sort: [SortByParam, SortDirection];
+            let i = index
+          "
+        >
           <div class="task" cdkDrag *ngIf="board.status === 'TODO'">
             <input
               #inputName
@@ -51,13 +79,20 @@
         </ng-container>
       </div>
     </div>
-    <div class="kanban__block" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="kanban__block">
       <h3 class="title">In Progress</h3>
       <div class="add__button" (click)="toggleModal('INPROGRESS')">
         <span class="sub__title">add new task</span>
       </div>
       <div class="board">
-        <ng-container *ngFor="let board of boards; let i = index">
+        <ng-container
+          *ngFor="
+            let board of progress
+              | filter: SearchValue:SortByParam
+              | sort: [SortByParam, SortDirection];
+            let i = index
+          "
+        >
           <div cdkDrag class="task" *ngIf="board.status === 'INPROGRESS'">
             <input
               #inputName
@@ -79,13 +114,20 @@
         </ng-container>
       </div>
     </div>
-    <div class="kanban__block" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="kanban__block">
       <h3 class="title">Done</h3>
       <div class="add__button" (click)="toggleModal('DONE')">
         <span class="sub__title">add new task</span>
       </div>
       <div class="board">
-        <ng-container *ngFor="let board of boards; let i = index">
+        <ng-container
+          *ngFor="
+            let board of done
+              | filter: SearchValue:SortByParam
+              | sort: [SortByParam, SortDirection];
+            let i = index
+          "
+        >
           <div
             [ngClass]="{ message: board.archive === true }"
             cdkDrag
