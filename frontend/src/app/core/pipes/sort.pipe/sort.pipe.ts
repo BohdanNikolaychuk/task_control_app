@@ -1,22 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { IDashBoard } from './../../interface/IDashBoard';
+import { IBoard } from 'src/app/core/interface/IBoard';
 
 @Pipe({
   name: 'sort',
 })
 export class SortPipe implements PipeTransform {
-  transform(value: Array<string>, args: any[]): any {
-    console.log(value);
-    console.log(args);
-
+  transform(value: IDashBoard[] | IBoard[], args: string[]): any {
     const sortField = args[0];
     const sortDirection = args[1];
+
     let multiplier = 1;
 
     if (sortDirection === 'desc') {
       multiplier = -1;
     }
 
-    value.sort((a: any, b: any) => {
+    value.sort((a: IDashBoard | IBoard, b: IDashBoard | IBoard) => {
       if (a[sortField] < b[sortField]) {
         return -1 * multiplier;
       } else if (a[sortField] > b[sortField]) {

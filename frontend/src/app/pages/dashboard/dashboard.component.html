@@ -1,6 +1,5 @@
 <div class="container">
   <div class="info">
-    <h3 class="title">dashboard</h3>
     <div class="filter">
       <div class="search__filter">
         <input
@@ -13,6 +12,7 @@
         <select [(ngModel)]="SortByParam">
           <option value="name">By name</option>
           <option value="desc">By description</option>
+          <option value="createdAt">By date</option>
         </select>
 
         <button class="button__cancel" (click)="onSortDirection()">
