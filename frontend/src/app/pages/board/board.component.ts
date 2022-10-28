@@ -88,21 +88,55 @@ export class BoardComponent implements OnInit {
     this.boardService.deleteBoard(this.selectedID, boardId);
   }
 
+  changeStatusInTask(boardId: string, status: string) {
+    this.boardService.changeStatusInTask(this.selectedID, boardId, status);
+  }
+
   drop(event: CdkDragDrop<IBoard[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
+    // const currentElement =
+    //   event.container.element.nativeElement.classList.toString();
+
+    // if (currentElement.includes('progress')) {
+    //   this.boardService.changeStatusInTask(
+    //     this.selectedID,
+    //     this.progress[event.previousIndex]._id,
+    //     'INPROGRESS'
+    //   );
+    // } else if (currentElement.includes('done')) {
+    //   this.boardService.changeStatusInTask(
+    //     this.selectedID,
+    //     this.done[event.previousIndex]._id,
+    //     'DONE'
+    //   );
+    // } else if (currentElement.includes('todo')) {
+    //   this.boardService.changeStatusInTask(
+    //     this.selectedID,
+    //     this.todo[event.previousIndex]._id,
+    //     'TODO'
+    //   );
+    // }
+
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+
+    // if (event.previousContainer === event.container) {
+    //   moveItemInArray(
+    //     event.container.data,
+    //     event.previousIndex,
+    //     event.currentIndex
+    //   );
+    // } else {
+    //   transferArrayItem(
+    //     event.previousContainer.data,
+    //     event.container.data,
+    //     event.previousIndex,
+    //     event.currentIndex
+    //   );
+    // }
   }
 
   toggleModal = (status: string) => {

@@ -45,7 +45,7 @@
 
   <div class="kanban__board" cdkDropListGroup>
     <div
-      class="kanban__block"
+      class="kanban__block todo"
       cdkDropList
       [cdkDropListData]="todo"
       (cdkDropListDropped)="drop($event)"
@@ -57,10 +57,9 @@
       <div class="board">
         <div
           class="task"
+          [ngClass]="{ message: board.archive === true }"
           *ngFor="
-            let board of todo
-              | filter: SearchValue:SortByParam
-              | sort: [SortByParam, SortDirection];
+            let board of todo | sort: [SortByParam, SortDirection];
             let i = index
           "
           cdkDrag
@@ -86,7 +85,7 @@
     </div>
 
     <div
-      class="kanban__block"
+      class="kanban__block progress"
       cdkDropList
       [cdkDropListData]="progress"
       (cdkDropListDropped)="drop($event)"
@@ -96,7 +95,15 @@
         <span class="sub__title">add new task</span>
       </div>
       <div class="board">
-        <div class="task" *ngFor="let board of progress; let i = index" cdkDrag>
+        <div
+          [ngClass]="{ message: board.archive === true }"
+          class="task"
+          *ngFor="
+            let board of progress | sort: [SortByParam, SortDirection];
+            let i = index
+          "
+          cdkDrag
+        >
           <input
             #inputName
             class="board__info-title"
@@ -116,8 +123,9 @@
         </div>
       </div>
     </div>
+
     <div
-      class="kanban__block"
+      class="kanban__block done"
       cdkDropList
       [cdkDropListData]="done"
       (cdkDropListDropped)="drop($event)"
@@ -126,30 +134,32 @@
       <div class="add__button" (click)="toggleModal('DONE')">
         <span class="sub__title">add new task</span>
       </div>
-      <div class="board">
-        <div class="task" *ngFor="let board of done; let i = index" cdkDrag>
-          <input
-            #inputName
-            class="board__info-title"
-            value="{{ board.name }}"
-          />
+      <div
+        *ngFor="
+          let board of done | sort: [SortByParam, SortDirection];
+          let i = index
+        "
+        class="task"
+        [ngClass]="{ message: board.archive === true }"
+        cdkDrag
+      >
+        <input #inputName class="board__info-title" value="{{ board.name }}" />
+        <button
+          class="button__nav"
+          (click)="editBoard(board._id, inputName.value)"
+        >
+          Edit
+        </button>
+        <div>
+          <button class="button__nav" (click)="deleteBoard(board._id, i)">
+            Delete
+          </button>
           <button
             class="button__nav"
-            (click)="editBoard(board._id, inputName.value)"
+            (click)="changeArchiveStatus(board._id, board.archive)"
           >
-            Edit
+            Archive
           </button>
-          <div>
-            <button class="button__nav" (click)="deleteBoard(board._id, i)">
-              Delete
-            </button>
-            <button
-              class="button__nav"
-              (click)="changeArchiveStatus(board._id, board.archive)"
-            >
-              Archive
-            </button>
-          </div>
         </div>
       </div>
     </div>

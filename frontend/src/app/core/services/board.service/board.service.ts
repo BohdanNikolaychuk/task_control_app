@@ -91,4 +91,21 @@ export class BoardService {
       )
       .subscribe();
   }
+
+  changeStatusInTask(dashId: string, boardId: string, status: string) {
+    let boardsTemp = this.getBoardsValue().map((board) => {
+      return board._id === boardId ? { ...board, status } : board;
+    });
+    this.setBoards(boardsTemp);
+
+    this.http
+      .patch(
+        `${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`,
+        {
+          status: status,
+        },
+        { responseType: 'text' }
+      )
+      .subscribe();
+  }
 }
