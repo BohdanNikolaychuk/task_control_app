@@ -1,5 +1,7 @@
 <div class="container">
   <div class="info">
+    <!-- <app-filter></app-filter> -->
+
     <div class="filter">
       <div class="search__filter">
         <input
@@ -53,6 +55,12 @@
     add new dashboard
   </button>
   <div class="dashboards">
+    <!-- <app-dashboard-list
+      [dashboards]="dashboards"
+      [deleteDashBoard]="deleteDashBoard"
+      [editDashBoards]="editDashBoards"
+    ></app-dashboard-list> -->
+
     <div
       class="dashboard"
       *ngFor="
@@ -73,7 +81,7 @@
         <p class="dashboard__info-text">{{ dashboard.desc }}</p>
         <p class="dashboard__info-date">
           {{ dashboard.createdAt | date: " MM/dd/yyyy" }} at
-          {{ dashboard.createdAt | date: " hh:mm:ss" }}
+          {{ dashboard.createdAt | date: " hh:mm" }}
         </p>
 
         <app-button

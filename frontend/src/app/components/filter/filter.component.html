@@ -1,0 +1,21 @@
+<div class="filter">
+  <div class="search__filter">
+    <input
+      [(ngModel)]="SearchValue"
+      type="text"
+      class="input__search"
+      placeholder="Filter..."
+    />
+
+    <select [(ngModel)]="SortByParam">
+      <option value="name">By name</option>
+      <option value="desc">By description</option>
+      <option value="createdAt">By date</option>
+    </select>
+
+    <button class="button__cancel" (click)="onSortDirection()">
+      <span *ngIf="SortDirection === 'asc'">Sorting by ASC</span>
+      <span *ngIf="SortDirection === 'desc'">Sorting by DESC</span>
+    </button>
+  </div>
+</div>

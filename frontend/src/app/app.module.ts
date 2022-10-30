@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BoardComponent } from './pages/board/board.component';
 import { PathNotFoundComponent } from './pages/path-not-found/path-not-found.component';
-import { HeaderComponent } from './features/header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { ButtonModule } from './shared/button/button.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -21,6 +21,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { SortPipe } from './core/pipes/sort.pipe/sort.pipe';
 import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
+import { FilterComponent } from './components/filter/filter.component';
+import { DashboardListComponent } from './components/dashboard-list/dashboard-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +37,8 @@ import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
     RegisterComponent,
     SortPipe,
     FilterPipe,
+    FilterComponent,
+    DashboardListComponent,
   ],
   imports: [
     BrowserModule,

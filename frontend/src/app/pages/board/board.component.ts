@@ -93,50 +93,43 @@ export class BoardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<IBoard[]>) {
-    // const currentElement =
-    //   event.container.element.nativeElement.classList.toString();
+    const currentElement =
+      event.container.element.nativeElement.classList.toString();
 
-    // if (currentElement.includes('progress')) {
-    //   this.boardService.changeStatusInTask(
-    //     this.selectedID,
-    //     this.progress[event.previousIndex]._id,
-    //     'INPROGRESS'
-    //   );
-    // } else if (currentElement.includes('done')) {
-    //   this.boardService.changeStatusInTask(
-    //     this.selectedID,
-    //     this.done[event.previousIndex]._id,
-    //     'DONE'
-    //   );
-    // } else if (currentElement.includes('todo')) {
-    //   this.boardService.changeStatusInTask(
-    //     this.selectedID,
-    //     this.todo[event.previousIndex]._id,
-    //     'TODO'
-    //   );
-    // }
+    if (currentElement.includes('progress')) {
+      this.boardService.changeStatusInTask(
+        this.selectedID,
+        event.item.element.nativeElement.id,
+        'INPROGRESS'
+      );
+    } else if (currentElement.includes('done')) {
+      this.boardService.changeStatusInTask(
+        this.selectedID,
+        event.item.element.nativeElement.id,
+        'DONE'
+      );
+    } else if (currentElement.includes('todo')) {
+      this.boardService.changeStatusInTask(
+        this.selectedID,
+        event.item.element.nativeElement.id,
+        'TODO'
+      );
+    }
 
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
-
-    // if (event.previousContainer === event.container) {
-    //   moveItemInArray(
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex
-    //   );
-    // } else {
-    //   transferArrayItem(
-    //     event.previousContainer.data,
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex
-    //   );
-    // }
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 
   toggleModal = (status: string) => {

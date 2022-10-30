@@ -13,8 +13,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  @Output() countUpdate = new EventEmitter<string>();
-
   dashboards: IDashBoard[] = [];
   //serach
   showModal = false;

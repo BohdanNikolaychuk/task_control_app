@@ -93,6 +93,20 @@ class BoardsController {
       res.send(error)
     }
   }
+
+
+  async changeStatusInTask(req, res, next) {
+    try {
+      Boards.findOneAndUpdate(
+        { _id: req.params.boardId, dashId: req.params.dashId },
+        { $set: req.body },
+      ).then(() => {
+        res.sendStatus(200);
+      });
+    } catch (error) {
+      res.send(error)
+    }
+  }
 }
 
 module.exports = new BoardsController();

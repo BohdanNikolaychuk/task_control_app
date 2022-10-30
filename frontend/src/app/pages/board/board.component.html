@@ -62,6 +62,7 @@
             let board of todo | sort: [SortByParam, SortDirection];
             let i = index
           "
+          data-id="{{ board._id }}"
           cdkDrag
         >
           <input
@@ -102,6 +103,7 @@
             let board of progress | sort: [SortByParam, SortDirection];
             let i = index
           "
+          data-id="{{ board._id }}"
           cdkDrag
         >
           <input
@@ -134,32 +136,40 @@
       <div class="add__button" (click)="toggleModal('DONE')">
         <span class="sub__title">add new task</span>
       </div>
-      <div
-        *ngFor="
-          let board of done | sort: [SortByParam, SortDirection];
-          let i = index
-        "
-        class="task"
-        [ngClass]="{ message: board.archive === true }"
-        cdkDrag
-      >
-        <input #inputName class="board__info-title" value="{{ board.name }}" />
-        <button
-          class="button__nav"
-          (click)="editBoard(board._id, inputName.value)"
+
+      <div class="board">
+        <div
+          *ngFor="
+            let board of done | sort: [SortByParam, SortDirection];
+            let i = index
+          "
+          class="task"
+          [ngClass]="{ message: board.archive === true }"
+          cdkDrag
+          data-id="{{ board._id }}"
         >
-          Edit
-        </button>
-        <div>
-          <button class="button__nav" (click)="deleteBoard(board._id, i)">
-            Delete
-          </button>
+          <input
+            #inputName
+            class="board__info-title"
+            value="{{ board.name }}"
+          />
           <button
             class="button__nav"
-            (click)="changeArchiveStatus(board._id, board.archive)"
+            (click)="editBoard(board._id, inputName.value)"
           >
-            Archive
+            Edit
           </button>
+          <div>
+            <button class="button__nav" (click)="deleteBoard(board._id, i)">
+              Delete
+            </button>
+            <button
+              class="button__nav"
+              (click)="changeArchiveStatus(board._id, board.archive)"
+            >
+              Archive
+            </button>
+          </div>
         </div>
       </div>
     </div>
