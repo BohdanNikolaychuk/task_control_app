@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+
+  OnInit,
+  
+  OnDestroy,
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { IDashBoardForm } from 'src/app/core/interface/IForm';
@@ -12,7 +18,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   dashboards: IDashBoard[] = [];
   //serach
   showModal = false;
@@ -34,6 +40,10 @@ export class DashboardComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       desc: new FormControl(''),
     });
+  }
+
+  ngOnDestroy(): void {
+    this.dashBoardsSub.unsubscribe();
   }
 
   getDashBoards() {

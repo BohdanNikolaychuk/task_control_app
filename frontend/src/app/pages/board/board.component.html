@@ -59,7 +59,9 @@
           class="task"
           [ngClass]="{ message: board.archive === true }"
           *ngFor="
-            let board of todo | sort: [SortByParam, SortDirection];
+            let board of todo
+              | filter: SearchValue:SortByParam
+              | sort: [SortByParam, SortDirection];
             let i = index
           "
           data-id="{{ board._id }}"
@@ -100,7 +102,9 @@
           [ngClass]="{ message: board.archive === true }"
           class="task"
           *ngFor="
-            let board of progress | sort: [SortByParam, SortDirection];
+            let board of progress
+              | filter: SearchValue:SortByParam
+              | sort: [SortByParam, SortDirection];
             let i = index
           "
           data-id="{{ board._id }}"
@@ -140,7 +144,9 @@
       <div class="board">
         <div
           *ngFor="
-            let board of done | sort: [SortByParam, SortDirection];
+            let board of done
+              | filter: SearchValue:SortByParam
+              | sort: [SortByParam, SortDirection];
             let i = index
           "
           class="task"
