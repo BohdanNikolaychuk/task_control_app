@@ -54,14 +54,11 @@ export class DashboardService {
   }
   //  end create DashBoard
   deleteDashBoard(id: string) {
-    this.http
-      .delete(`${environment.MIAN_URL}dashboards/${id}`)
-      .subscribe(() => {
-        let filteredDash = this.getDashBoardsValue().filter(
-          (board) => board._id !== id
-        );
-        this.setDashBoards(filteredDash);
-      });
+    let filteredDash = this.getDashBoardsValue().filter(
+      (board) => board._id !== id
+    );
+    this.setDashBoards(filteredDash);
+    this.http.delete(`${environment.MIAN_URL}dashboards/${id}`).subscribe();
   }
 
   editDashBoard(id: string, name: string) {

@@ -42,19 +42,18 @@ export class BoardService {
       .subscribe((newBoard: IBoard) => {
         const newBoards = [...this.getBoardsValue(), newBoard];
         this.setBoards(newBoards);
-        console.log(newBoards);
       });
   }
 
   deleteBoard(dashId: string, boardId: string) {
+    let filteredDash = this.getBoardsValue().filter(
+      (board) => board._id !== boardId
+    );
+    this.setBoards(filteredDash);
+
     this.http
       .delete(`${environment.MIAN_URL}dashboards/${dashId}/boards/${boardId}`)
-      .subscribe(() => {
-        let filteredDash = this.getBoardsValue().filter(
-          (board) => board._id !== boardId
-        );
-        this.setBoards(filteredDash);
-      });
+      .subscribe();
   }
 
   editBoard(dashId: string, boardId: string, name: string) {
@@ -62,7 +61,6 @@ export class BoardService {
       return board._id === boardId ? { ...board, name } : board;
     });
     this.setBoards(boardsTemp);
-    console.log(boardsTemp);
 
     this.http
       .patch(

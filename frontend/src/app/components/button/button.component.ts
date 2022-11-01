@@ -8,6 +8,10 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ButtonComponent implements OnInit {
   @Input() name!: string;
 
+  getNameButton() {
+    return this.name;
+  }
+
   constructor() {}
 
   ngOnInit(): void {}

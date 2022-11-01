@@ -26,8 +26,6 @@ export class ModalComponent implements OnInit {
   }
 
   createDashBoard(formData: IDashBoardForm): void {
-    console.log(formData);
-
     this.dashboardService.createDashBoard(formData);
   }
 }

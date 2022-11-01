@@ -36,7 +36,7 @@ describe('DashboardService', () => {
     expect(resDashBoard).not.toEqual([]);
   });
 
-  it('fetch boards', () => {
+  it('fetch Dashboards', () => {
     service.getDashBoards();
     const request = controller.expectOne({
       method: 'GET',
@@ -47,10 +47,13 @@ describe('DashboardService', () => {
     const savedBoards: IDashBoard[] = service.getDashBoardsValue();
     expect(savedBoards[0].name).toBe('name1');
     expect(savedBoards).toEqual(DashBoard);
+    expect(savedBoards).not.toBeUndefined();
   });
 
   it('create dashboard', () => {
-    service.createDashBoard({ name: 'name1', desc: 'desc1' });
+    const createDash = { name: 'name1', desc: 'desc1' };
+
+    service.createDashBoard(createDash);
     const request = controller.expectOne({
       method: 'POST',
       url: `${environment.MIAN_URL}dashboards`,
@@ -72,8 +75,8 @@ describe('DashboardService', () => {
     const savedBoards: IDashBoard[] = service.getDashBoardsValue();
 
     expect(savedBoards.length).not.toBe(3);
-    expect(savedBoards.length).toBe(6);
-    expect(savedBoards[1].name).toBe('name2');
+    expect(savedBoards.length).toBe(5);
+    expect(savedBoards[0].name).toBe('name2');
   });
 
   it('edit dashboard', () => {
@@ -82,7 +85,7 @@ describe('DashboardService', () => {
     let dashBoardID: string = '1';
     service.editDashBoard(dashBoardID, 'Test');
     const savedBoards: IDashBoard[] = service.getDashBoardsValue();
-    console.log(savedBoards);
+
     expect(savedBoards.length).toBe(DashBoard.length);
     expect(savedBoards[0].name).not.toBe('name1');
     expect(savedBoards[0].name).toBe('Test');
