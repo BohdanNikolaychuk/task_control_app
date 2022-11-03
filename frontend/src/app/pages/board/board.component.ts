@@ -3,7 +3,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -14,6 +14,8 @@ import { BoardService } from 'src/app/core/services/board.service/board.service'
 
 @Component({
   selector: 'app-board',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
