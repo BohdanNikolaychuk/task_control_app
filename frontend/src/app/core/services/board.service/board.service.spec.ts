@@ -60,10 +60,6 @@ describe('BoardService', () => {
 
     service.deleteBoard(dashId, boardId);
     const savedBoards: IBoard[] = service.getBoardsValue();
-    console.log(
-      '🚀 ~ file: board.service.spec.ts ~ line 63 ~ it ~ savedBoards',
-      savedBoards
-    );
 
     expect(savedBoards.length).not.toBe(Boards.length);
     expect(savedBoards.length).toBe(2);
@@ -82,5 +78,33 @@ describe('BoardService', () => {
     expect(savedBoards.length).toBe(Boards.length);
     expect(savedBoards[0].name).not.toBe('name1');
     expect(savedBoards[0].name).toBe('Test');
+  });
+
+  it('change Archive Status', () => {
+    service.setBoards(Boards);
+
+    let dashId: string = '1';
+    let boardId: string = '1';
+    let archive = false;
+    service.changeArchiveStatus(dashId, boardId, archive);
+    const savedBoards: IBoard[] = service.getBoardsValue();
+
+    expect(savedBoards.length).toBe(Boards.length);
+    expect(savedBoards[0].archive).not.toBe(!archive);
+    expect(savedBoards[0].archive).toBe(archive);
+  });
+
+  it('changeS tatus In Task', () => {
+    service.setBoards(Boards);
+
+    let dashId: string = '1';
+    let boardId: string = '1';
+    let status: string = 'INPROGRESS';
+    service.changeStatusInTask(dashId, boardId, status);
+    const savedBoards: IBoard[] = service.getBoardsValue();
+
+    expect(savedBoards.length).toBe(Boards.length);
+    expect(savedBoards[0].status).not.toBe('TODO');
+    expect(savedBoards[0].status).toBe(status);
   });
 });

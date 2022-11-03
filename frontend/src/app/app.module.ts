@@ -13,7 +13,6 @@ import { ButtonModule } from './components/button/button.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ModalComponent } from './shared/modal/modal.component';
-import { InputComponent } from './shared/input/input.component';
 
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -30,7 +29,7 @@ import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
     PathNotFoundComponent,
     HeaderComponent,
     ModalComponent,
-    InputComponent,
+
     LoginComponent,
     RegisterComponent,
     SortPipe,
