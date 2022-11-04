@@ -13,10 +13,6 @@ const DashBoardsSchema = new mongoose.Schema({
     minlength: 2,
     trim: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-  },
   userId: { type: String, required: true },
   tasks: {
     type: Array,
@@ -34,7 +30,8 @@ const DashBoardsSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-});
+
+}, { timestamps: true });
 
 const DashBoards = mongoose.model('DashBoards', DashBoardsSchema);
 

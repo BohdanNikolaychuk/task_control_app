@@ -31,7 +31,11 @@
           placeholder="Enter board name..."
         />
         <div class="buttons">
-          <button class="button__cancel" (click)="toggleModal('')">
+          <button
+            type="button"
+            class="button__cancel"
+            (click)="toggleModal('')"
+          >
             Cancel
           </button>
           <button class="button__create" [disabled]="!form.valid" type="submit">

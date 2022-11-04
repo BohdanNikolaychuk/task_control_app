@@ -29,7 +29,6 @@ import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
     PathNotFoundComponent,
     HeaderComponent,
     ModalComponent,
-
     LoginComponent,
     RegisterComponent,
     SortPipe,

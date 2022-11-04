@@ -22,11 +22,13 @@ export class AuthService {
     return this.http.post(`${this.MAIN_URL}register`, FormData);
   }
 
-  login(FormData: ILogin): Observable<{ jwt_token: string }> {
+  login(FormData: ILogin): Observable<{ jwt_token: string; fullName: string }> {
     return this.http.post(`${this.MAIN_URL}login`, FormData).pipe(
-      tap(({ jwt_token }: any) => {
+      tap(({ jwt_token, fullName }: any) => {
         localStorage.setItem('SeesionUser', jwt_token);
+        localStorage.setItem('Name', fullName);
         this.setToken(jwt_token);
+
         this.isLoggedIn.next(this.isAuth());
       })
     );

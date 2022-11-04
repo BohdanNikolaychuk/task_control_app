@@ -66,12 +66,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.dashboardService.editDashBoard(id, name);
   }
 
-  //TrackBy
-
-  trackByFn(index: number, dashboard: IDashBoard) {
-    return dashboard._id;
-  }
-
   onSortDirection() {
     if (this.SortDirection === 'desc') {
       this.SortDirection = 'asc';

@@ -42,7 +42,9 @@
         minlength="2"
       />
       <div class="buttons">
-        <button class="button__cancel" (click)="toggleModal()">Cancel</button>
+        <button type="button" class="button__cancel" (click)="toggleModal()">
+          Cancel
+        </button>
         <button type="submit" [disabled]="!form.valid" class="button__create">
           Create
         </button>
@@ -53,14 +55,19 @@
     add new dashboard
   </button>
   <div class="dashboards">
+    <div class="dashboard" *ngIf="!dashboards.length">
+      <div class="dashboard__info">
+        <p class="dashboard__info-text">You dont have dashboards :)</p>
+      </div>
+    </div>
+
     <div
       class="dashboard"
       *ngFor="
         let dashboard of dashboards
           | filter: SearchValue:SortByParam
           | sort: [SortByParam, SortDirection];
-        let i = index;
-        trackBy: trackByFn
+        let i = index
       "
     >
       <div class="dashboard__info">
@@ -71,23 +78,23 @@
           value="{{ dashboard.name }}"
         />
         <p class="dashboard__info-text">{{ dashboard.desc }}</p>
+
         <p class="dashboard__info-date">
-          {{ dashboard.createdAt | date: " MM/dd/yyyy" }} at
-          {{ dashboard.createdAt | date: " hh:mm" }}
+          {{ dashboard.createdAt | date: "MMM d, y, h:mm:ss a" }}
         </p>
-
-        <app-button
-          (click)="deleteDashBoard(dashboard._id)"
-          name="delete"
-        ></app-button>
-        <app-button
-          name="Edit"
-          (click)="editDashBoards(dashboard._id, inputName.value)"
-        ></app-button>
-
+        <div>
+          <app-button
+            (click)="deleteDashBoard(dashboard._id)"
+            name="delete"
+          ></app-button>
+          <app-button
+            name="Edit"
+            (click)="editDashBoards(dashboard._id, inputName.value)"
+          ></app-button>
+        </div>
         <app-button
           routerLink="{{ dashboard._id }}/boards"
-          name="more info"
+          name="To Task"
         ></app-button>
       </div>
     </div>

@@ -45,7 +45,7 @@ class AuthController {
         const payload = { fullName: user.fullName, userId: user._id };
         const jwtToken = jwt.sign(payload, 'secret-jwt-key');
         return res.send({
-          message: 'Success',
+          fullName: user.fullName,
           jwt_token: jwtToken,
         });
       }

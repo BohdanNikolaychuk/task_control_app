@@ -9,7 +9,7 @@ import { AuthService } from '../../core/services/auth.service/auth.service';
 })
 export class HeaderComponent implements OnInit {
   loginStatus: boolean = false;
-
+  name: string = '';
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.loginStatus = this.authService.isAuth();
+    this.name = localStorage.getItem('Name');
   }
 
   logOut() {
