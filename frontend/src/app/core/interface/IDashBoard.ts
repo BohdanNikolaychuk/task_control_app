@@ -1,5 +1,5 @@
 export interface IDashBoard {
-  createdAt: string;
+  createdAt: Date;
   desc: string;
   name: string;
   userId: string;

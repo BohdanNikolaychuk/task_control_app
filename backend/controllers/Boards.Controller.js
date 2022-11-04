@@ -72,7 +72,6 @@ class BoardsController {
       DashBoard.save();
       await Boards.findOneAndRemove({ _id: boardId, dashId }).then(
         (removeBoards) => {
-
           res.send(removeBoards);
         },
       );

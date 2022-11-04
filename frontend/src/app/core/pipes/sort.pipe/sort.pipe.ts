@@ -9,7 +9,6 @@ export class SortPipe implements PipeTransform {
   transform(value: IDashBoard[] | IBoard[], args: string[]): any {
     const sortField = args[0];
     const sortDirection = args[1];
-
     let multiplier = 1;
 
     if (sortDirection === 'desc') {
@@ -19,9 +18,9 @@ export class SortPipe implements PipeTransform {
     if (sortField === 'createdAt') {
       value.sort((a: any, b: any) => {
         if (a.createdAt > b.createdAt) {
-          return -1;
+          return -1 * multiplier;
         } else if (a.createdAt < b.createdAt) {
-          return 1;
+          return 1 * multiplier;
         } else {
           return 0;
         }
