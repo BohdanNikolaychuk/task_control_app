@@ -3,7 +3,6 @@ import { IBoard } from 'src/app/core/interface/IBoard';
 
 export const DashBoard: IDashBoard[] = [
   {
-    createdAt: '1/2/2022',
     desc: 'desc1',
     name: 'name1',
     userId: '1',
@@ -11,7 +10,6 @@ export const DashBoard: IDashBoard[] = [
     __v: 1,
   },
   {
-    createdAt: '1/2/2022',
     desc: 'desc2',
     name: 'name2',
     userId: '2',
@@ -19,7 +17,6 @@ export const DashBoard: IDashBoard[] = [
     __v: 2,
   },
   {
-    createdAt: '1/2/2022',
     desc: 'desc3',
     name: 'name3',
     userId: '3',
@@ -27,7 +24,6 @@ export const DashBoard: IDashBoard[] = [
     __v: 3,
   },
   {
-    createdAt: '1/2/2022',
     desc: 'desc3',
     name: 'name3',
     userId: '3',
@@ -35,7 +31,6 @@ export const DashBoard: IDashBoard[] = [
     __v: 3,
   },
   {
-    createdAt: '1/2/2022',
     desc: 'desc4',
     name: 'name4',
     userId: '4',
@@ -43,7 +38,6 @@ export const DashBoard: IDashBoard[] = [
     __v: 4,
   },
   {
-    createdAt: '1/2/2022',
     desc: 'desc5',
     name: 'name5',
     userId: '5',

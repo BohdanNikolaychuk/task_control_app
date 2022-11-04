@@ -36,4 +36,15 @@ describe('DashboardComponent', () => {
 
     expect(component.showModal).toBeTrue();
   });
+
+  it('click sorting button ', () => {
+    fixture.detectChanges();
+
+    let buttonElement =
+      fixture.debugElement.nativeElement.querySelector('#sorting');
+    spyOn(component, 'onSortDirection');
+    buttonElement.click();
+
+    expect(component.onSortDirection).toHaveBeenCalled();
+  });
 });
