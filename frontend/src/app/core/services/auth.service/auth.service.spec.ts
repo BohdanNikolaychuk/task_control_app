@@ -25,6 +25,5 @@ describe('AuthService', () => {
   it('login', () => {
     const registerData = { fullName: 'Jon', password: '123' };
     const log = service.login(registerData);
-    console.log('🚀 ~ file: auth.service.spec.ts ~ line 28 ~ it ~ log', log);
   });
 });
