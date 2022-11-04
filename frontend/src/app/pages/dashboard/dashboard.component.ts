@@ -1,9 +1,8 @@
 import {
   Component,
-
   OnInit,
-  
   OnDestroy,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
