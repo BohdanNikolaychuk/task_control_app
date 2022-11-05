@@ -20,6 +20,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { SortPipe } from './core/pipes/sort.pipe/sort.pipe';
 import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
     RegisterComponent,
     SortPipe,
     FilterPipe,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

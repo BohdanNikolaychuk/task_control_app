@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class DashboardService {
-  private dashBoardsGeted = false;
   private dashBoards = new BehaviorSubject<IDashBoard[]>([]);
 
   constructor(private http: HttpClient) {}
@@ -31,14 +30,11 @@ export class DashboardService {
   // fetch data
 
   getDashBoards() {
-    if (!this.dashBoardsGeted) {
-      this.http
-        .get<IDashBoard[]>(`${environment.MIAN_URL}dashboards`)
-        .subscribe((dashBoards: IDashBoard[]) => {
-          this.setDashBoards(dashBoards);
-          this.dashBoardsGeted = true;
-        });
-    }
+    this.http
+      .get<IDashBoard[]>(`${environment.MIAN_URL}dashboards`)
+      .subscribe((dashBoards: IDashBoard[]) => {
+        this.setDashBoards(dashBoards);
+      });
   }
   // end fetch data
 

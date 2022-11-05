@@ -16,10 +16,10 @@
           *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched"
         >
           <span *ngIf="form.get('fullName')?.errors?.['required']">
-            Full name is required</span
+            Your full name is required</span
           >
           <span *ngIf="form.get('fullName')?.errors?.['minlength']">
-            full Name is short</span
+            Your full name is short</span
           >
         </p>
         <input
@@ -35,10 +35,10 @@
           *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
         >
           <span *ngIf="form.get('password')?.errors?.['required']">
-            Password is required</span
+            Your password is required</span
           >
           <span *ngIf="form.get('password')?.errors?.['minlength']">
-            Password is short</span
+            Your password is required</span
           >
         </p>
         <button type="submit" [disabled]="form.invalid" class="button__create">
