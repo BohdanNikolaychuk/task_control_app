@@ -52,17 +52,6 @@ describe('DashboardComponent', () => {
     expect(component.onSortDirection).toHaveBeenCalled();
   });
 
-  it('click sorting button ', () => {
-    fixture.detectChanges();
-
-    let buttonElement =
-      fixture.debugElement.nativeElement.querySelector('#sorting');
-    spyOn(component, 'onSortDirection');
-    buttonElement.click();
-
-    expect(component.onSortDirection).toHaveBeenCalled();
-  });
-
   it('Check initial form value for create dashboard', () => {
     const form = component.form;
     const DashBoardFormValue = {

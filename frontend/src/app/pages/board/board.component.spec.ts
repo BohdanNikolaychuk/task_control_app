@@ -24,4 +24,24 @@ describe('BoardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('open  modal to create task', () => {
+    fixture.detectChanges();
+
+    let buttonElement =
+      fixture.debugElement.nativeElement.querySelector('.add__button');
+    console.log(buttonElement);
+
+    buttonElement.click();
+
+    expect(component.showModal).toBeTrue();
+  });
+
+  it('Check initial form value for create dashboard', () => {
+    const form = component.form;
+    const DashBoardFormValue = {
+      name: '',
+    };
+    expect(form.value).toEqual(DashBoardFormValue);
+  });
 });
