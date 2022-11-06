@@ -34,16 +34,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
+    this.initialForm();
     this.dashboardService.getDashBoards();
     this.getDashBoards();
-    this.form = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      desc: new FormControl(''),
-    });
   }
 
   ngOnDestroy(): void {
     this.dashBoardsSub.unsubscribe();
+  }
+
+  initialForm() {
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      desc: new FormControl(''),
+    });
   }
 
   getDashBoards() {

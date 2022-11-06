@@ -21,4 +21,11 @@ describe('ModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('show modal ', () => {
+    component.show = true;
+    fixture.detectChanges();
+
+    expect(component.show).toEqual(true);
+  });
 });
