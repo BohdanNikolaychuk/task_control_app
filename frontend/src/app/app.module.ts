@@ -21,6 +21,7 @@ import { TokenInterceptor } from './core/interceptor/token.interceptor';
 import { SortPipe } from './core/pipes/sort.pipe/sort.pipe';
 import { FilterPipe } from './core/pipes/filter.pipe/filter.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
+import { LoadingInterceptor } from './core/interceptor/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,11 @@ import { LoadingComponent } from './components/loading/loading.component';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: TokenInterceptor,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],
