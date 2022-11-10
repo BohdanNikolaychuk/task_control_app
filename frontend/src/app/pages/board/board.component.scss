@@ -55,6 +55,12 @@
   &::placeholder {
     color: #ffffff;
   }
+  &:focus {
+    border-bottom: 1px solid #262626;
+  }
+  &:hover {
+    border-bottom: 1px solid #262626;
+  }
 }
 .message {
   background-color: #262626;
