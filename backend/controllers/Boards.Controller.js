@@ -23,15 +23,7 @@ class BoardsController {
         dashId,
         status,
       });
-      // const DashBoard = await DashBoards.findById(dashId);
-      // DashBoard.tasks = [...DashBoard.tasks, newBoard];
 
-      // DashBoard.toDoCount = DashBoard.tasks.filter((task) => task.status === 'TODO').length;
-      // DashBoard.inProgressCount = DashBoard.tasks.filter(
-      //   (task) => task.status === 'INPROGRESS',
-      // ).length;
-      // DashBoard.doneCount = DashBoard.tasks.filter((task) => task.status === 'DONE').length;
-      // DashBoard.save();
       newBoard.save().then((newAddBoard) => {
         res.send(newAddBoard);
       });
@@ -54,20 +46,7 @@ class BoardsController {
   async deleteBoard(req, res, next) {
     try {
       const { boardId, dashId } = req.params;
-      // const DashBoard = await DashBoards.findById(dashId);
-      // //
-      // const filteredTasks = DashBoard.tasks.filter((task) => {
-      //   JSON.stringify(task._id) !== boardId;
-      // });
 
-      // DashBoard.tasks = filteredTasks;
-      // DashBoard.toDoCount = DashBoard.tasks.filter((task) => task.status === 'TODO').length;
-      // DashBoard.inProgressCount = DashBoard.tasks.filter(
-      //   (task) => task.status === 'INPROGRESS',
-      // ).length;
-      // DashBoard.doneCount = DashBoard.tasks.filter((task) => task.status === 'DONE').length;
-
-      // DashBoard.save();
       await Boards.findOneAndRemove({ _id: boardId, dashId }).then((removeBoards) => {
         res.send(removeBoards);
       });

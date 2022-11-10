@@ -4,14 +4,6 @@ const jwt = require('jsonwebtoken');
 
 
 class AuthController {
-  async authUser() {
-    try {
-
-
-    } catch (error) {
-
-    }
-  }
 
   async registerUser(req, res, next) {
 

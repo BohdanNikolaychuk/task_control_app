@@ -14,22 +14,7 @@ const DashBoardsSchema = new mongoose.Schema({
     trim: true,
   },
   userId: { type: String, required: true },
-  tasks: {
-    type: Array,
-    default: [],
-  },
-  toDoCount: {
-    type: Number,
-    default: 0,
-  },
-  inProgressCount: {
-    type: Number,
-    default: 0,
-  },
-  doneCount: {
-    type: Number,
-    default: 0
-  },
+
 
 }, { timestamps: true });
 
