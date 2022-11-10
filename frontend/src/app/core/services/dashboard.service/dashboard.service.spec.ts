@@ -30,7 +30,7 @@ describe('DashboardService', () => {
   });
 
   it('setDashBoards', () => {
-    const setDashBoards = service.setDashBoards(DashBoard);
+    service.setDashBoards(DashBoard);
     const resDashBoard = service.getDashBoardsValue();
     expect(resDashBoard).toEqual(DashBoard);
     expect(resDashBoard).not.toEqual([]);

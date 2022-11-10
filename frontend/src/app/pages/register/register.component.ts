@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register(formData: IRegister) {
-    console.log(FormData);
     this.subscription$ = this.authService
       .register(formData)
       .subscribe((newDashBoard) => {
