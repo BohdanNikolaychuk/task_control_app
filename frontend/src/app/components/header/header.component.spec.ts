@@ -1,5 +1,10 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 
@@ -20,5 +25,8 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('ngOnInit return undefined', () => {
+    expect(component.ngOnInit()).toBeUndefined();
   });
 });
