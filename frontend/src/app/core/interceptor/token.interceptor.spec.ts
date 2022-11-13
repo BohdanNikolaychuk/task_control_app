@@ -15,4 +15,8 @@ describe('TokenInterceptor', () => {
     const interceptor: TokenInterceptor = TestBed.inject(TokenInterceptor);
     expect(interceptor).toBeTruthy();
   });
+
+  it('1', () => {
+    const interceptor: TokenInterceptor = TestBed.inject(TokenInterceptor);
+  });
 });

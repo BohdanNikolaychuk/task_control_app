@@ -21,4 +21,14 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Check initial form value for register', () => {
+    const form = component.form;
+    const RegisterFormValue = {
+      fullName: null,
+      password: null,
+    };
+
+    expect(form.value).toEqual(RegisterFormValue);
+  });
 });

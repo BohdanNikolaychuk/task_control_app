@@ -17,6 +17,10 @@ export class RegisterComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
     this.form = new FormGroup({
       fullName: new FormControl(null, [
         Validators.required,
